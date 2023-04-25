@@ -1,19 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <include
+        android:id="@+id/toolbar_main"
+        layout="@layout/mytoolbar" />
 
     <TextView
+        android:id="@+id/tv_login"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="25dp"
+        android:gravity="center"
+        android:text="管理员登录"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:drawableRight="@drawable/ic_admin"
+        android:layout_alignEnd="@+id/toolbar_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycle_view"
+        android:layout_below="@id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F1F1F1"
+        tools:listitem="@layout/adapter_list_user"/>
+
+    <Button
+        android:id="@+id/bt_top"
+        android:paddingStart="28.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_width="130dp"
+        android:layout_height="28.8dp"
+        android:background="#71CFC9"
+        android:text="返回顶部"
+        android:textColor="@color/white"
+        android:drawableLeft="@drawable/top"
+        android:drawablePadding="-18dp"/>
+
+    <Button
+        android:id="@+id/bt_leave"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:paddingTop="15dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="50dp"
+        android:text="留 言"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:background="@drawable/border_button_radius"
+        android:drawableTop="@drawable/ic_create"
+        android:drawablePadding="-10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        />
+
+</RelativeLayout>
