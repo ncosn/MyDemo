@@ -49,7 +49,6 @@
                     android:gravity="center"
                     android:textColor="@color/white"
                     android:textSize="13sp"
-                    android:background="@drawable/border_radius"
                     />
 
 

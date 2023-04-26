@@ -26,6 +26,4 @@ public interface MainDao {
     @Query("SELECT * FROM comment_client")
     List<MainData> getAll();
 
-
-
 }

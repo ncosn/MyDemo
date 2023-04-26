@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorBackground"
+    tools:context=".UserCommentSucces">
+    <include
+        android:id="@+id/toolbar_main"
+        layout="@layout/mytoolbar" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_marginTop="104dp"
+                android:layout_width="260dp"
+                android:layout_height="191dp"
+                android:src="@drawable/comment_success" />
+
+            <TextView
+                android:layout_marginTop="31dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thanks"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/bt_back"
+                android:layout_marginTop="75dp"
+                android:layout_gravity="center"
+                android:layout_width="180dp"
+                android:layout_height="37dp"
+                android:textColor="@color/white"
+                android:background="@drawable/border_button_back"
+                android:text="@string/home" />
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</LinearLayout>

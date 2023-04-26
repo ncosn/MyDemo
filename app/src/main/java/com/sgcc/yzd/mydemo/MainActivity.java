@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     Button btLeave, btTop;
     RecyclerView recyclerView;
 
-    androidx.appcompat.widget.Toolbar toolbar;
+    Toolbar toolbar;
     public static String TOOLBARTITLE = "电子意见簿";
 
     List<MainData> dataList = new ArrayList<>();
@@ -37,12 +39,27 @@ public class MainActivity extends AppCompatActivity {
         init();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        init();
+//        dataList = database.mainDao().getAll();
+//        mainAdapter = new MainAdapter(MainActivity.this,dataList);
+//        //Set adapter
+//        recyclerView.setAdapter(mainAdapter);
+//        mainAdapter.notifyDataSetChanged();
+//
+//        String len = "length:"+dataList.size();
+//
+//        Log.i("length", len);
+    }
+
     public void init() {
         //Assign varibale
         tvLogin = findViewById(R.id.tv_login);
         btLeave = findViewById(R.id.bt_leave);
         btTop = findViewById(R.id.bt_top);
-        recyclerView = findViewById(R.id.recycle_view);
+        recyclerView = findViewById(R.id.recycler_view);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
         tvTitile = findViewById(R.id.tv_title);
@@ -51,12 +68,18 @@ public class MainActivity extends AppCompatActivity {
         //Initialize database
         database = RoomDB.getInstance(this);
         dataList = database.mainDao().getAll();
+
         //Initialize linear layout manager
         linearLayoutManager = new LinearLayoutManager(this);
         //Set layout manager
         recyclerView.setLayoutManager(linearLayoutManager);
+        mainAdapter = new MainAdapter(MainActivity.this,dataList);
         //Set adapter
         recyclerView.setAdapter(mainAdapter);
+//
+//        String len = "length:"+dataList.size();
+//
+//        Log.i("length", len);
 
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override

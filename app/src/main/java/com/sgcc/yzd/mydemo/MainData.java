@@ -31,7 +31,17 @@ public class MainData implements Serializable {
     @ColumnInfo(name = "msg")
     private String msg;
 
-    //Generate getter and setter;
+    @ColumnInfo(name = "time")
+    private String time;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public int getStatus() {
         return status;
     }
@@ -72,20 +82,20 @@ public class MainData implements Serializable {
         this.type = type;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
     public String getMsg() {
         return msg;
     }
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
 

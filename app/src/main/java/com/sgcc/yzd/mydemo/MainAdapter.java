@@ -19,6 +19,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     private List<MainData> dataList;
     private Activity context;
     private RoomDB database;
+    public static String ANONYMOUSNAME = "匿名用户";
+    public static String PRAISE = "表扬";
+    public static String ADVICE = "建议";
+    public static String COMPLAIN = "投诉";
 
     public MainAdapter(Activity context,List<MainData> dataList) {
         this.context = context;
@@ -39,7 +43,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull @NotNull MainAdapter.ViewHolder holder, int position) {
         MainData data = dataList.get(position);
         database = RoomDB.getInstance(context);
-        holder.tvTime.setText(data.getType());
+        holder.tvTime.setText(data.getTime());
+        String name = data.getName();
         switch (data.getStatus()) {
             //0代表实名,1代表匿名
             case 0:
@@ -54,26 +59,33 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
                                 getDrawable(R.drawable.user_female));
                         break;
                 }
-                holder.tvName.setText(data.getName());
+                holder.tvName.setText(name);
                 break;
             case 1:
                 holder.imUser.setImageDrawable(context.getResources()
                         .getDrawable(R.drawable.user_anonymous));
-                holder.tvName.setText("匿名用户");
+                holder.tvName.setText(ANONYMOUSNAME);
                 break;
         }
         switch (data.getType()) {
             case 0:
-                holder.tvType.setText("表扬");
+                holder.tvType.setText(PRAISE);
+                holder.tvType.setBackground(context.getResources()
+                        .getDrawable(R.drawable.border_type_praise));
                 break;
             case 1:
-                holder.tvType.setText("建议");
+                holder.tvType.setText(ADVICE);
+                holder.tvType.setBackground(context.getResources()
+                        .getDrawable(R.drawable.border_type_advice));
                 break;
             case 2:
-                holder.tvType.setText("投诉");
+                holder.tvType.setText(COMPLAIN);
+                holder.tvType.setBackground(context.getResources()
+                        .getDrawable(R.drawable.border_type_complain));
                 break;
         }
-        holder.tvMsg.setText(data.getMsg());
+        String msg = data.getMsg();
+        holder.tvMsg.setText((msg==null) ? "" : msg);
 
 
     }
