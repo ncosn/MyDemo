@@ -35,7 +35,7 @@ public class UserCommentActivity extends AppCompatActivity {
     Button btBack, btCommit;
 
     EditText etName, etTel, etComment;
-    TextView tvTitile;
+    TextView tvTitile, tvName, tvSex, tvTel;
     Toolbar toolbar;
     public static String TOOLBARTITLE = "客户意见留言";
 
@@ -65,6 +65,8 @@ public class UserCommentActivity extends AppCompatActivity {
         rbComplain = findViewById(R.id.rb_complain);
 
         linearLayout = findViewById(R.id.ll_real);
+
+
         btBack = findViewById(R.id.bt_back);
         btCommit = findViewById(R.id.bt_commit);
 
@@ -75,6 +77,10 @@ public class UserCommentActivity extends AppCompatActivity {
         etName = (EditText) findViewById(R.id.et_name);
         etTel = (EditText) findViewById(R.id.et_tel);
         etComment = (EditText) findViewById(R.id.et_comment);
+
+        tvName = findViewById(R.id.tv_name);
+        tvSex = findViewById(R.id.tv_sex);
+        tvTel = findViewById(R.id.tv_tel);
 
         status = 0;
         sex = 0;
@@ -87,9 +93,11 @@ public class UserCommentActivity extends AppCompatActivity {
                     case R.id.rb_real:
                         status = 0;
                         linearLayout.setVisibility(View.VISIBLE);
+                        break;
                     case R.id.rb_anonymous:
                         status = 1;
-                        linearLayout.setVisibility(View.INVISIBLE);
+                        linearLayout.setVisibility(View.GONE);
+                        break;
                 }
             }
         });
