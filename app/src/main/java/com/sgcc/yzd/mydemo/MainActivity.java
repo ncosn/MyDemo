@@ -1,5 +1,6 @@
 package com.sgcc.yzd.mydemo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,10 +84,27 @@ public class MainActivity extends AppCompatActivity {
 //
 //        Log.i("length", len);
 
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (recyclerView.getLayoutManager().findViewByPosition(0)==null) {
+                    btTop.setVisibility(View.VISIBLE);
+                } else {
+                    btTop.setVisibility(View.GONE);
+                }
+            }
+        });
+
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                recyclerView.smoothScrollToPosition(0);
             }
         });
 

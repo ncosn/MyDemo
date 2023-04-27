@@ -34,6 +34,7 @@
 
     <Button
         android:id="@+id/bt_top"
+        android:visibility="gone"
         android:paddingStart="28.5dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
