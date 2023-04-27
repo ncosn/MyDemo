@@ -11,7 +11,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +23,19 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.com.salsoft.sqlitestudioremote.SQLiteStudioService;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView tvLogin, tvTitle;
     Button btLeave, btTop;
     RecyclerView recyclerView;
 
+    EditText etPassword;
+
     Toolbar toolbar;
     public static String TOOLBAR_TITLE = "电子意见簿";
+    public static String PASSWORD = "123456";
 
     List<MainData> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
@@ -38,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SQLiteStudioService.instance().start(this);
 
         init();
     }
@@ -49,10 +58,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void init() {
+
         //Assign varibale
         tvLogin = findViewById(R.id.tv_login);
         btLeave = findViewById(R.id.bt_leave);
         btTop = findViewById(R.id.bt_top);
+        etPassword = findViewById(R.id.et_password);
         recyclerView = findViewById(R.id.recycler_view);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
@@ -92,13 +103,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tvLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Create dialog
+                Dialog dialog = new Dialog(MainActivity.this);
+                //Set content view
+                dialog.setContentView(R.layout.admin_login);
+                //Show dialog
+                dialog.show();
+
+                EditText etPassword = dialog.findViewById(R.id.et_password);
+                Button btLogin = dialog.findViewById(R.id.bt_login);
+                btLogin.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String password = etPassword.getText().toString().trim();
+                        if (password.equals(PASSWORD)) {
+                            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+//                        dialog.dismiss();
+                    }
+                });
+
+                ImageView imCancel = dialog.findViewById(R.id.im_cancel);
+                imCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+        });
+
+
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recyclerView.smoothScrollToPosition(0);
             }
         });
-
 
         btLeave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,8 +155,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
 
+    @Override
+    protected void onDestroy() {
+        SQLiteStudioService.instance().stop();
+        super.onDestroy();
+    }
 }

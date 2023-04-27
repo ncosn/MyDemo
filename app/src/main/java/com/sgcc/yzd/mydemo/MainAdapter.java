@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
+public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder> {
 
     private List<MainData> dataList;
     private Activity context;
@@ -24,78 +24,124 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
     public static String ADVICE = "建议";
     public static String COMPLAIN = "投诉";
 
+    //类型，用此来判断recyclerview该用哪个布局显示
+    public final int TYPE_EMPTY = 0;
+    public final int TYPE_NORMAL = 1;
+
     public MainAdapter(Activity context,List<MainData> dataList) {
         this.context = context;
         this.dataList = dataList;
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(dataList.size()<=0){
+            return TYPE_EMPTY;
+        }
+        return  TYPE_NORMAL;
+    }
+
     @NonNull
     @NotNull
     @Override
-    public MainAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.adapter_list_user,parent,false);
-        return new ViewHolder(view);
+    public MainAdapter.BaseViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view;
+        BaseViewHolder viewHolder;
+        if (viewType == TYPE_EMPTY) {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.adapter_empty,parent,false);
+            viewHolder = new EmptyViewHolder(view);
+            return viewHolder;
+        } else {
+            view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.adapter_list_user,parent,false);
+            viewHolder = new ViewHolder(view);
+        }
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @NotNull MainAdapter.ViewHolder holder, int position) {
-        MainData data = dataList.get(position);
-        database = RoomDB.getInstance(context);
-        holder.tvTime.setText(data.getTime());
-        String name = data.getName();
-        switch (data.getStatus()) {
-            //0代表实名,1代表匿名
-            case 0:
-                switch (data.getSex()) {
-                    //0代表男,1代表女
+    public void onBindViewHolder(@NonNull @NotNull MainAdapter.BaseViewHolder holder, int position) {
+        int type = getItemViewType(position);
+        switch (type) {
+            case TYPE_EMPTY:
+                EmptyViewHolder emptyViewHolder = (EmptyViewHolder) holder;
+                break;
+            case TYPE_NORMAL:
+                ViewHolder viewHolder = (ViewHolder) holder;
+                MainData data = dataList.get(position);
+                database = RoomDB.getInstance(context);
+                viewHolder.tvTime.setText(data.getTime());
+                String name = data.getName();
+                switch (data.getStatus()) {
+                    //0代表实名,1代表匿名
                     case 0:
-                        holder.imUser.setImageDrawable(context.getResources()
-                                .getDrawable(R.drawable.user_male));
+                        switch (data.getSex()) {
+                            //0代表男,1代表女
+                            case 0:
+                                viewHolder.imUser.setImageDrawable(context.getResources()
+                                        .getDrawable(R.drawable.user_male));
+                                break;
+                            case 1:
+                                viewHolder.imUser.setImageDrawable(context.getResources().
+                                        getDrawable(R.drawable.user_female));
+                                break;
+                        }
+                        viewHolder.tvName.setText(name);
                         break;
                     case 1:
-                        holder.imUser.setImageDrawable(context.getResources().
-                                getDrawable(R.drawable.user_female));
+                        viewHolder.imUser.setImageDrawable(context.getResources()
+                                .getDrawable(R.drawable.user_anonymous));
+                        viewHolder.tvName.setText(ANONYMOUSNAME);
                         break;
                 }
-                holder.tvName.setText(name);
-                break;
-            case 1:
-                holder.imUser.setImageDrawable(context.getResources()
-                        .getDrawable(R.drawable.user_anonymous));
-                holder.tvName.setText(ANONYMOUSNAME);
-                break;
+                switch (data.getType()) {
+                    case 0:
+                        viewHolder.tvType.setText(PRAISE);
+                        viewHolder.tvType.setBackground(context.getResources()
+                                .getDrawable(R.drawable.border_type_praise));
+                        break;
+                    case 1:
+                        viewHolder.tvType.setText(ADVICE);
+                        viewHolder.tvType.setBackground(context.getResources()
+                                .getDrawable(R.drawable.border_type_advice));
+                        break;
+                    case 2:
+                        viewHolder.tvType.setText(COMPLAIN);
+                        viewHolder.tvType.setBackground(context.getResources()
+                                .getDrawable(R.drawable.border_type_complain));
+                        break;
+                }
+                String msg = data.getMsg();
+                viewHolder.tvMsg.setText((msg==null) ? "" : msg);
         }
-        switch (data.getType()) {
-            case 0:
-                holder.tvType.setText(PRAISE);
-                holder.tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_praise));
-                break;
-            case 1:
-                holder.tvType.setText(ADVICE);
-                holder.tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_advice));
-                break;
-            case 2:
-                holder.tvType.setText(COMPLAIN);
-                holder.tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_complain));
-                break;
-        }
-        String msg = data.getMsg();
-        holder.tvMsg.setText((msg==null) ? "" : msg);
-
 
     }
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        if (dataList.size() <= 0) {
+            return 1;
+        } else {
+            return dataList.size();
+        }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class BaseViewHolder extends RecyclerView.ViewHolder{
+
+        public BaseViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class EmptyViewHolder extends BaseViewHolder{
+        public EmptyViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class ViewHolder extends BaseViewHolder{
 
         ImageView imUser;
         TextView tvTime, tvName, tvType, tvMsg;

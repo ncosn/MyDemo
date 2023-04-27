@@ -98,7 +98,7 @@ public class UserCommentActivity extends AppCompatActivity {
 
         status = STATUS_REAL;
         sex = SEX_MALE;
-        type = TYPE_ADVICE;
+        type = TYPE_PRAISE;
 
         rgStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -213,8 +213,6 @@ public class UserCommentActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
-
 
 }

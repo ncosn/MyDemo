@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="330dp"
+    android:layout_height="227dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="管理员登录"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"/>
+        <ImageView
+            android:clickable="true"
+            android:id="@+id/im_cancel"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_width="21.5dp"
+            android:layout_height="21.5dp"
+            android:src="@drawable/ic_cancel" />
+    </RelativeLayout>
+
+    <View
+        android:layout_marginTop="19.5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/dash_line"/>
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_marginTop="30dp"
+        android:layout_width="230dp"
+        android:layout_height="42dp"
+        android:hint="请输入口令"
+        android:paddingStart="15dp"
+        android:background="@drawable/border_et_admin"/>
+
+    <Button
+        android:id="@+id/bt_login"
+        android:layout_marginTop="30dp"
+        android:text="登 录"
+        android:textColor="@color/white"
+        android:layout_width="230dp"
+        android:layout_height="37dp"
+        android:background="@drawable/border_button_green"/>
+
+
+
+</LinearLayout>

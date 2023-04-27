@@ -131,10 +131,11 @@
 
             </LinearLayout>
             <View
+                android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="23dp"
                 android:layout_gravity="center"
-                android:layout_width="670dp"
-                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:background="@drawable/dash_line"/>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -173,9 +174,10 @@
                 </RadioGroup>
             </LinearLayout>
             <View
+                android:layout_marginHorizontal="40dp"
                 android:layout_gravity="center"
-                android:layout_width="670dp"
-                android:layout_height="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:background="@drawable/dash_line"/>
             <RelativeLayout
                 android:paddingTop="30dp"
