@@ -22,12 +22,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView tvLogin, tvTitile;
+    TextView tvLogin, tvTitle;
     Button btLeave, btTop;
     RecyclerView recyclerView;
 
     Toolbar toolbar;
-    public static String TOOLBARTITLE = "电子意见簿";
+    public static String TOOLBAR_TITLE = "电子意见簿";
 
     List<MainData> dataList = new ArrayList<>();
     LinearLayoutManager linearLayoutManager;
@@ -46,15 +46,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         init();
-//        dataList = database.mainDao().getAll();
-//        mainAdapter = new MainAdapter(MainActivity.this,dataList);
-//        //Set adapter
-//        recyclerView.setAdapter(mainAdapter);
-//        mainAdapter.notifyDataSetChanged();
-//
-//        String len = "length:"+dataList.size();
-//
-//        Log.i("length", len);
     }
 
     public void init() {
@@ -65,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recycler_view);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_main);
-        tvTitile = findViewById(R.id.tv_title);
-        tvTitile.setText(TOOLBARTITLE);
+        tvTitle = findViewById(R.id.tv_title);
+        tvTitle.setText(TOOLBAR_TITLE);
 
         //Initialize database
         database = RoomDB.getInstance(this);

@@ -41,7 +41,7 @@
                 android:layout_height="37dp"
                 android:textColor="@color/white"
                 android:background="@drawable/border_button_back"
-                android:text="@string/home" />
+                android:text="@string/backToHome" />
         </LinearLayout>
 
     </ScrollView>

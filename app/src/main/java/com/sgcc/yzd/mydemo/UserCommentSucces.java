@@ -13,8 +13,8 @@ public class UserCommentSucces extends AppCompatActivity {
 
     Toolbar toolbar;
     Button btBack;
-    TextView tvTitile;
-    public static String TOOLBARTITLE = "客户意见留言成功";
+    TextView tvTitle;
+    public static String TOOLBAR_TITLE = "客户意见留言成功";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +27,9 @@ public class UserCommentSucces extends AppCompatActivity {
     public void init() {
         toolbar = findViewById(R.id.toolbar_main);
         btBack = findViewById(R.id.bt_back);
-        tvTitile = findViewById(R.id.tv_title);
+        tvTitle = findViewById(R.id.tv_title);
 
-        tvTitile.setText(TOOLBARTITLE);
+        tvTitle.setText(TOOLBAR_TITLE);
 
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MyDemo</string>
     <string name="thanks">留言成功，感谢您的留言!</string>
-    <string name="home">返回主页</string>
+    <string name="backToHome">返回主页</string>
+    <string name="leaveWord">留 言</string>
+    <string name="backToTop">返回顶部</string>
 </resources>

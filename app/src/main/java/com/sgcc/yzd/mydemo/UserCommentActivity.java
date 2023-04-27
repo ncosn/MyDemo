@@ -5,6 +5,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,9 +37,20 @@ public class UserCommentActivity extends AppCompatActivity {
     Button btBack, btCommit;
 
     EditText etName, etTel, etComment;
-    TextView tvTitile, tvName, tvSex, tvTel;
+    TextView tvTitle, tvName, tvSex, tvTel, tvWordsNum;
     Toolbar toolbar;
-    public static String TOOLBARTITLE = "客户意见留言";
+
+    public static String TOOLBAR_TITLE = "客户意见留言";
+    public static String WORDS_NUM = "/500";
+    public static int TYPE_PRAISE = 0;
+    public static int TYPE_ADVICE = 1;
+    public static int TYPE_COMPLAIN = 2;
+    public static int SEX_MALE = 0;
+    public static int SEX_FEMALE = 1;
+    public static int STATUS_REAL = 0;
+    public static int STATUS_ANONYMOUS = 1;
+
+    public static int WORD_LIMIT_NUM= 500;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,31 +84,32 @@ public class UserCommentActivity extends AppCompatActivity {
         btCommit = findViewById(R.id.bt_commit);
 
         toolbar = findViewById(R.id.toolbar_main);
-        tvTitile = findViewById(R.id.tv_title);
-        tvTitile.setText(TOOLBARTITLE);
+        tvTitle = findViewById(R.id.tv_title);
+        tvTitle.setText(TOOLBAR_TITLE);
 
         etName = (EditText) findViewById(R.id.et_name);
         etTel = (EditText) findViewById(R.id.et_tel);
         etComment = (EditText) findViewById(R.id.et_comment);
 
+        tvWordsNum = findViewById(R.id.tv_words_num);
         tvName = findViewById(R.id.tv_name);
         tvSex = findViewById(R.id.tv_sex);
         tvTel = findViewById(R.id.tv_tel);
 
-        status = 0;
-        sex = 0;
-        type = 0;
+        status = STATUS_REAL;
+        sex = SEX_MALE;
+        type = TYPE_ADVICE;
 
         rgStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_real:
-                        status = 0;
+                        status = STATUS_REAL;
                         linearLayout.setVisibility(View.VISIBLE);
                         break;
                     case R.id.rb_anonymous:
-                        status = 1;
+                        status = STATUS_ANONYMOUS;
                         linearLayout.setVisibility(View.GONE);
                         break;
                 }
@@ -107,10 +121,10 @@ public class UserCommentActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_male:
-                        sex = 0;
+                        sex = SEX_MALE;
                         break;
                     case R.id.rb_female:
-                        sex = 1;
+                        sex = SEX_FEMALE;
                         break;
                 }
             }
@@ -121,13 +135,13 @@ public class UserCommentActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_praise:
-                        type = 0;
+                        type = TYPE_PRAISE;
                         break;
                     case R.id.rb_advice:
-                        type = 1;
+                        type = TYPE_ADVICE;
                         break;
                     case R.id.rb_complain:
-                        type = 2;
+                        type = TYPE_COMPLAIN;
                         break;
                 }
             }
@@ -165,6 +179,41 @@ public class UserCommentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        etComment.addTextChangedListener(new TextWatcher() {
+            //记录输入的字数
+            private CharSequence enterWords;
+            private int selectionStart;
+            private int selectionEnd;
+            private int enteredWords;
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //实时记录输入的字数
+                enterWords= charSequence;
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                //TextView显示字数
+                tvWordsNum.setText(editable.length() + WORDS_NUM);
+                selectionStart = etComment.getSelectionStart();
+                selectionEnd = etComment.getSelectionEnd();
+                if (enterWords.length() > WORD_LIMIT_NUM) {
+                    //删除多余输入的字（不会显示出来）
+                    editable.delete(selectionStart - 1, selectionEnd);
+                    int tempSelection = selectionEnd;
+                    etComment.setText(editable);
+                    //设置光标在最后
+                    etComment.setSelection(tempSelection);
+                }
+            }
+        });
+
     }
 
 
