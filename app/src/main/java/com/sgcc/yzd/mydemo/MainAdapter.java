@@ -19,7 +19,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     private List<MainData> dataList;
     private Activity context;
     private RoomDB database;
-    public static String ANONYMOUSNAME = "匿名用户";
+    public static String ANONYMOUS_NAME = "匿名用户";
     public static String PRAISE = "表扬";
     public static String ADVICE = "建议";
     public static String COMPLAIN = "投诉";
@@ -93,7 +93,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                     case 1:
                         viewHolder.imUser.setImageDrawable(context.getResources()
                                 .getDrawable(R.drawable.user_anonymous));
-                        viewHolder.tvName.setText(ANONYMOUSNAME);
+                        viewHolder.tvName.setText(ANONYMOUS_NAME);
                         break;
                 }
                 switch (data.getType()) {

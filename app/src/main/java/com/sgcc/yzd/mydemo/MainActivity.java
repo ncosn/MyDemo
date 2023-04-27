@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         String password = etPassword.getText().toString().trim();
                         if (password.equals(PASSWORD)) {
-                            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                            Intent intent = new Intent(MainActivity.this,AdminActivity.class);
                             startActivity(intent);
                             dialog.dismiss();
                         }

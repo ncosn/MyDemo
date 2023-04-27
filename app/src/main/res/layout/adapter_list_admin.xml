@@ -51,6 +51,7 @@
                     android:textSize="13sp"
                     />
 
+
             </LinearLayout>
 
             <TextView
@@ -60,57 +61,6 @@
                 android:textSize="12sp"
                 android:textColor="#666666"/>
 
-            <RelativeLayout
-                android:id="@+id/ll_reply"
-                android:visibility="gone"
-                android:paddingBottom="15dp"
-                android:layout_marginTop="14.5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#F9F9F9">
-
-                <ImageView
-                    android:id="@+id/im_admin"
-                    android:layout_marginTop="15.5dp"
-                    android:layout_marginStart="25dp"
-                    android:src="@mipmap/admin"
-                    android:layout_width="36.7dp"
-                    android:layout_height="36.7dp" />
-
-                <TextView
-                    android:id="@+id/tv_admin_name"
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_toEndOf="@+id/im_admin"
-                    android:gravity="center"
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15.5dp"
-                    android:layout_marginTop="27.5dp"
-                    android:layout_toEndOf="@+id/tv_admin_name"
-                    android:text="回复："
-                    android:textSize="12sp"
-                    android:textColor="#333333"/>
-                <TextView
-                    android:id="@+id/tv_reply"
-                    android:layout_toEndOf="@+id/textview"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginTop="27.5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="12sp"
-                    android:textColor="#666666"/>
-
-            </RelativeLayout>
 
         </LinearLayout>
         <androidx.cardview.widget.CardView

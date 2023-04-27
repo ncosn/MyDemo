@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <include
+        android:id="@+id/toolbar_main"
+        layout="@layout/mytoolbar" />
+
+
+    <TextView
+        android:id="@+id/tv_exit"
+        android:clickable="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="35.5dp"
+        android:gravity="center"
+        android:text="退出"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        android:drawableEnd="@mipmap/ic_exit"
+        android:drawablePadding="5dp"
+        android:layout_alignEnd="@+id/toolbar_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+    <HorizontalScrollView
+        android:id="@+id/sv_filter"
+        android:layout_below="@+id/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/ll_picker"
+            android:layout_width="960dp"
+            android:layout_height="53dp"
+            android:gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <TextView
+                android:paddingStart="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="状态："
+                android:textColor="#333333"
+                android:textSize="13sp"
+                />
+            <RadioGroup
+                android:id="@+id/rg_reply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:checkedButton="@id/rb_all">
+                <RadioButton
+                    android:id="@+id/rb_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全部"/>
+                <RadioButton
+                    android:id="@+id/rb_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已回复" />
+                <RadioButton
+                    android:id="@+id/rb_no_reply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="未回复" />
+            </RadioGroup>
+            
+            <View
+                android:layout_marginStart="15dp"
+                android:layout_width="1dp"
+                android:layout_height="31dp"
+                android:background="@color/colorBackground"/>
+
+            <TextView
+                android:paddingStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="类型："
+                android:textColor="#333333"
+                android:textSize="13sp"
+                />
+            <RadioGroup
+                android:id="@+id/rg_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/rb_praise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="表扬" />
+                <RadioButton
+                    android:id="@+id/rb_advice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="建议" />
+                <RadioButton
+                    android:id="@+id/rb_complain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="投诉" />
+            </RadioGroup>
+
+            <View
+                android:layout_marginStart="15dp"
+                android:layout_width="1dp"
+                android:layout_height="31dp"
+                android:background="@color/colorBackground"/>
+
+            <TextView
+                android:layout_marginStart="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时间："/>
+
+            <Button
+                android:layout_marginStart="39dp"
+                android:id="@+id/bt_clear"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:textSize="13sp"
+                android:text="清除"
+                android:textColor="@color/colorPrimary"
+                android:background="@drawable/border_button_clear"/>
+
+            <Button
+                android:layout_marginStart="10dp"
+                android:id="@+id/filter"
+                android:layout_width="65dp"
+                android:layout_height="25dp"
+                android:textSize="13sp"
+                android:text="清除"
+                android:textColor="@color/white"
+                android:background="@drawable/border_button_filter"/>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_below="@id/sv_filter"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        tools:listitem="@layout/adapter_list_user"/>
+
+    <Button
+        android:id="@+id/bt_top"
+        android:visibility="gone"
+        android:paddingStart="28.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_width="130dp"
+        android:layout_height="28.8dp"
+        android:background="#71CFC9"
+        android:text="@string/backToTop"
+        android:textColor="@color/white"
+        android:drawableStart="@drawable/top"
+        android:drawablePadding="-18dp"/>
+
+
+</RelativeLayout>
