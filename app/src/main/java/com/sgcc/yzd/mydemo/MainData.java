@@ -34,6 +34,39 @@ public class MainData implements Serializable {
     @ColumnInfo(name = "time")
     private String time;
 
+    @ColumnInfo(name = "if_reply")
+    private int ifReply;
+
+    @ColumnInfo(name = "admin_name")
+    private String adminName;
+
+    @ColumnInfo(name = "reply")
+    private String reply;
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
+    }
+
+    public int getIfReply() {
+        return ifReply;
+    }
+
+    public void setIfReply(int ifReply) {
+        this.ifReply = ifReply;
+    }
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public int getID() {
         return ID;
     }

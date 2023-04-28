@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="40dp"
+    android:orientation="vertical">
+    <TextView
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="留言详情"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_marginTop="19.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客户姓名："
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#666666" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="联系方式："
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <TextView
+                    android:id="@+id/tv_tel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#666666" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="留言类型："
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="65dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="10dp"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="留言时间："
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#666666" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="留言内容："
+                    android:textSize="13sp"
+                    android:textColor="#333333" />
+                <TextView
+                    android:id="@+id/tv_comment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="#666666" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="回复客户:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/et_reply"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="14.5dp"
+                    android:background="@drawable/border_et_radius"
+                    android:gravity="top|left"
+                    android:hint="请输入您的留言吧"
+                    android:paddingHorizontal="15dp"
+                    android:paddingTop="9.5dp"
+                    android:textSize="12sp"/>
+                <TextView
+                    android:id="@+id/tv_words_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="0/500"
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:layout_alignBottom="@+id/et_reply"
+                    android:layout_alignEnd="@+id/et_reply" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回复人姓名："
+                    android:textSize="16dp"
+                    android:textColor="@color/colorPrimary" />
+                <EditText
+                    android:id="@+id/et_call"
+                    android:paddingHorizontal="10dp"
+                    android:layout_width="160dp"
+                    android:layout_height="30dp"
+                    android:hint="请输入回复人称呼"
+                    android:textSize="12sp"
+                    android:background="@drawable/border_et_call"/>
+            </LinearLayout>
+            <LinearLayout
+                android:paddingBottom="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp"
+                android:gravity="center">
+                <Button
+                    android:id="@+id/bt_back"
+                    android:layout_width="130dp"
+                    android:layout_height="37dp"
+                    android:text="返回"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/border_button_white" />
+                <Button
+                    android:id="@+id/bt_commit"
+                    android:layout_marginStart="20dp"
+                    android:layout_width="130dp"
+                    android:layout_height="37dp"
+                    android:text="提交"
+                    android:textColor="@color/white"
+                    android:background="@drawable/border_button_green"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

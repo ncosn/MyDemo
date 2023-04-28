@@ -129,11 +129,11 @@
 
             <Button
                 android:layout_marginStart="10dp"
-                android:id="@+id/filter"
+                android:id="@+id/bt_filter"
                 android:layout_width="65dp"
                 android:layout_height="25dp"
                 android:textSize="13sp"
-                android:text="清除"
+                android:text="筛选"
                 android:textColor="@color/white"
                 android:background="@drawable/border_button_filter"/>
 
@@ -146,7 +146,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:listitem="@layout/adapter_list_user"/>
+        tools:listitem="@layout/adapter_list_admin"/>
 
     <Button
         android:id="@+id/bt_top"

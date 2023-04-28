@@ -62,7 +62,7 @@
 
             <RelativeLayout
                 android:id="@+id/ll_reply"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:paddingBottom="15dp"
                 android:layout_marginTop="14.5dp"
                 android:layout_width="match_parent"

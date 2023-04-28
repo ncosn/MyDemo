@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     public static String PRAISE = "表扬";
     public static String ADVICE = "建议";
     public static String COMPLAIN = "投诉";
+    public static String ADMIN_NAME = "电网—";
 
     //类型，用此来判断recyclerview该用哪个布局显示
     public final int TYPE_EMPTY = 0;
@@ -115,6 +117,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                 }
                 String msg = data.getMsg();
                 viewHolder.tvMsg.setText((msg==null) ? "" : msg);
+                switch (data.getIfReply()) {
+                    case 0:
+                        viewHolder.relativeLayout.setVisibility(View.VISIBLE);
+                        String adminName = ADMIN_NAME + data.getAdminName();
+                        viewHolder.tvAdminName.setText(adminName);
+                        String reply = data.getReply();
+                        viewHolder.tvReply.setText(reply);
+                        break;
+                    case 1:
+                        viewHolder.relativeLayout.setVisibility(View.GONE);
+                        break;
+                }
         }
 
     }
@@ -144,7 +158,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     public class ViewHolder extends BaseViewHolder{
 
         ImageView imUser;
-        TextView tvTime, tvName, tvType, tvMsg;
+        TextView tvTime, tvName, tvType, tvMsg, tvAdminName, tvReply;
+        RelativeLayout relativeLayout;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -153,6 +168,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
             tvName = itemView.findViewById(R.id.tv_name);
             tvType = itemView.findViewById(R.id.tv_type);
             tvMsg = itemView.findViewById(R.id.tv_msg);
+            relativeLayout = itemView.findViewById(R.id.ll_reply);
+            tvAdminName = itemView.findViewById(R.id.tv_admin_name);
+            tvReply = itemView.findViewById(R.id.tv_reply);
         }
     }
 }

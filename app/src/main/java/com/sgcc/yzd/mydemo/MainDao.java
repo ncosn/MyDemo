@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -25,5 +26,17 @@ public interface MainDao {
     //Get all data query
     @Query("SELECT * FROM comment_client")
     List<MainData> getAll();
+
+    @Query("SELECT * FROM COMMENT_CLIENT WHERE if_reply = :ifReply AND type = :type")
+    List<MainData> getFilter(int ifReply, int type);
+
+    @Query("SELECT * FROM COMMENT_CLIENT WHERE type = :type")
+    List<MainData> getFilterType(int type);
+
+    @Query("SELECT * FROM COMMENT_CLIENT WHERE if_reply = :ifReply")
+    List<MainData> getFilterReply(int ifReply);
+
+    @Query("Update COMMENT_CLIENT SET if_reply = :ifReply, admin_name = :adminCall, reply = :reply WHERE ID = :sID")
+    void update(int sID, int ifReply, String adminCall, String reply);
 
 }
