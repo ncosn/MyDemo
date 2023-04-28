@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminActivity extends AppCompatActivity {
+    Integer ifReply=0, type=3;
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
     RadioGroup rgIfReply, rgType;
-    RadioButton rbReply, rbNoReply, rbPraise, rbAdvice, rbComplain;
+    RadioButton rbAll, rbReply, rbNoReply, rbPraise, rbAdvice, rbComplain;
     Toolbar toolbar;
 
     RoomDB database;
@@ -55,6 +56,7 @@ public class AdminActivity extends AppCompatActivity {
         btTop = findViewById(R.id.bt_top);
 
         rgIfReply = findViewById(R.id.rg_reply);
+        rbAll = findViewById(R.id.rb_all);
         rbReply = findViewById(R.id.rb_reply);
         rbNoReply = findViewById(R.id.rb_no_reply);
 
@@ -71,6 +73,40 @@ public class AdminActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adminAdapter = new AdminAdapter(AdminActivity.this,dataList);
         recyclerView.setAdapter(adminAdapter);
+
+        rgIfReply.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.rb_all:
+                        ifReply = 0;
+                        break;
+                    case R.id.rb_reply:
+                        ifReply = 1;
+                        break;
+                    case R.id.rb_no_reply:
+                        ifReply = 2;
+                        break;
+                }
+            }
+        });
+
+        rgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.rb_praise:
+                        type = 0;
+                        break;
+                    case R.id.rb_advice:
+                        type = 1;
+                        break;
+                    case R.id.rb_complain:
+                        type = 2;
+                        break;
+                }
+            }
+        });
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -89,7 +125,6 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
         tvExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,11 +133,52 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 recyclerView.smoothScrollToPosition(0);
+            }
+        });
+
+        btClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                rgType.clearCheck();
+                type = 3;
+                rgIfReply.check(R.id.rb_all);
+
+            }
+        });
+
+        btFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataList.clear();
+                switch (ifReply) {
+                    case 0:
+                        //Notify when data is updated
+                        if (type == 3) {
+                            dataList.addAll(database.mainDao().getAll());
+                        } else {
+                            dataList.addAll(database.mainDao().getAllType(type));
+                        }
+                        break;
+                    case 1:
+                        if (type == 3) {
+                            dataList.addAll(database.mainDao().getReplyAll());
+                        } else {
+                            dataList.addAll(database.mainDao().getFilter(0,type));
+                        }
+                        break;
+                    case 2:
+                        if (type == 3) {
+                            dataList.addAll(database.mainDao().getNoReplyAll());
+                        } else {
+                            dataList.addAll(database.mainDao().getFilter(1,type));
+                        }
+                        break;
+                }
+                adminAdapter.notifyDataSetChanged();
             }
         });
 
