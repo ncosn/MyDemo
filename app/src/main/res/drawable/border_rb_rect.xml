@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <size android:width="17dp"
+                android:height="17dp" />
+            <stroke android:width="0.5dp"
+                android:color="#666666"
+                android:dashWidth="1dp"
+                android:dashGap="1dp"/>
+            <solid android:color="#F3F3F3" />
+        </shape>
+    </item>
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <size android:width="17dp"
+                        android:height="17dp" />
+                    <stroke android:width="0.5dp"
+                        android:color="#666666"
+                        android:dashWidth="1dp"
+                        android:dashGap="1dp"/>
+                    <solid android:color="@color/colorPrimary" />
+                </shape>
+            </item>
+            <!--ic_check_white_24dp 是一个 √ 样式的图片 大小是24dp-->
+            <item android:drawable="@drawable/ic_check">
+                <shape>
+                    <size android:width="17dp"
+                        android:height="17dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+
+</selector>

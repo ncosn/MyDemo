@@ -4,4 +4,10 @@
     <string name="backToHome">返回主页</string>
     <string name="leaveWord">留 言</string>
     <string name="backToTop">返回顶部</string>
+    <string-array name="spinner_time">
+        <item>一周内</item>
+        <item>一个月内</item>
+        <item>三个月内</item>
+        <item>一年内</item>
+    </string-array>
 </resources>

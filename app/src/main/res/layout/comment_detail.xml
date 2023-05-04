@@ -164,7 +164,7 @@
                     android:layout_height="30dp"
                     android:hint="请输入回复人称呼"
                     android:textSize="12sp"
-                    android:background="@drawable/border_et_call"/>
+                    android:background="@drawable/border_et_radius"/>
             </LinearLayout>
             <LinearLayout
                 android:paddingBottom="30dp"

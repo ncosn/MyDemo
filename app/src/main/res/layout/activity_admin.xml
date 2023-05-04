@@ -48,24 +48,37 @@
                 />
             <RadioGroup
                 android:id="@+id/rg_reply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="195dp"
+                android:layout_height="30dp"
+                android:background="@drawable/border_rg"
                 android:orientation="horizontal"
                 android:checkedButton="@id/rb_all">
                 <RadioButton
+                    android:button="@null"
                     android:id="@+id/rb_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="全部"/>
+                    android:background="@drawable/border_rb_style"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="全部"
+                    android:textColor="@drawable/rb_color_check"/>
                 <RadioButton
+                    android:button="@null"
                     android:id="@+id/rb_reply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="已回复" />
+                    android:background="@drawable/border_rb_style"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:text="已回复"
+                    android:textColor="@drawable/rb_color_check"/>
                 <RadioButton
+                    android:button="@null"
                     android:id="@+id/rb_no_reply"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_rb_style"
+                    android:layout_width="65dp"
+                    android:layout_height="30dp"
+                    android:gravity="center"
+                    android:textColor="@drawable/rb_color_check"
                     android:text="未回复" />
             </RadioGroup>
             
@@ -89,20 +102,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <RadioButton
+                    android:gravity="center"
+                    android:background="@drawable/border_rb_praise"
+                    android:button="@null"
                     android:id="@+id/rb_praise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="表扬" />
+                    android:text="表扬"
+                    android:textColor="@drawable/rb_color_praise"/>
                 <RadioButton
+                    android:layout_marginStart="10dp"
                     android:id="@+id/rb_advice"
+                    android:background="@drawable/border_rb_advice"
+                    android:button="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="建议" />
+                    android:gravity="center"
+                    android:text="建议"
+                    android:textColor="@drawable/rb_color_advice"/>
                 <RadioButton
+                    android:layout_marginStart="10dp"
                     android:id="@+id/rb_complain"
+                    android:background="@drawable/border_rb_complain"
+                    android:button="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="投诉" />
+                    android:gravity="center"
+                    android:text="投诉"
+                    android:textColor="@drawable/rb_color_complain"/>
             </RadioGroup>
 
             <View
@@ -115,7 +142,16 @@
                 android:layout_marginStart="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#333333"
                 android:text="时间："/>
+
+            <Spinner
+                android:id="@+id/sp_time"
+                android:layout_width="128.5dp"
+                android:layout_height="30dp"
+                android:background="@drawable/border_sp_time"
+                android:entries="@array/spinner_time"
+                android:theme="@style/sp_time" />
 
             <Button
                 android:layout_marginStart="39dp"
@@ -128,14 +164,15 @@
                 android:background="@drawable/border_button_clear"/>
 
             <Button
-                android:layout_marginStart="10dp"
                 android:id="@+id/bt_filter"
-                android:layout_width="65dp"
+                android:layout_width="56dp"
                 android:layout_height="25dp"
-                android:textSize="13sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="29dp"
+                android:background="@drawable/border_button_filter"
                 android:text="筛选"
                 android:textColor="@color/white"
-                android:background="@drawable/border_button_filter"/>
+                android:textSize="13sp" />
 
         </LinearLayout>
     </HorizontalScrollView>

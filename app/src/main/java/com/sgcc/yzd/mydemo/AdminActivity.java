@@ -9,26 +9,34 @@ import androidx.room.Database;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class AdminActivity extends AppCompatActivity {
-    Integer ifReply=0, type=3;
+    Integer ifReply=0, type=3, time = 0;
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
     RadioGroup rgIfReply, rgType;
     RadioButton rbAll, rbReply, rbNoReply, rbPraise, rbAdvice, rbComplain;
     Toolbar toolbar;
+    Spinner spTime;
 
     RoomDB database;
     RecyclerView recyclerView;
@@ -64,6 +72,8 @@ public class AdminActivity extends AppCompatActivity {
         rbPraise = findViewById(R.id.rb_praise);
         rbAdvice = findViewById(R.id.rb_advice);
         rbComplain = findViewById(R.id.rb_complain);
+
+        spTime = findViewById(R.id.sp_time);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -140,13 +150,26 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                time = i;
+                Log.e("test",""+i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         btClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rgType.clearCheck();
                 type = 3;
                 rgIfReply.check(R.id.rb_all);
-
+                spTime.setSelection(0);
             }
         });
 
@@ -154,27 +177,50 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dataList.clear();
+                String startDate = "", endDate;
+                Calendar cal = Calendar.getInstance();
+                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                Date now = cal.getTime();
+                endDate = dateFormat.format(now);
+                switch (time) {
+                    case 0:
+                        cal.add(Calendar.DATE, -7);
+                        startDate = dateFormat.format(cal.getTime());
+                        break;
+                    case 1:
+                        cal.add(Calendar.MONTH, -1);
+                        startDate = dateFormat.format(cal.getTime());
+                        break;
+                    case 2:
+                        cal.add(Calendar.MONTH, -3);
+                        startDate = dateFormat.format(cal.getTime());
+                        break;
+                    case 3:
+                        cal.add(Calendar.YEAR, -1);
+                        startDate = dateFormat.format(cal.getTime());
+                        break;
+                }
                 switch (ifReply) {
                     case 0:
                         //Notify when data is updated
                         if (type == 3) {
-                            dataList.addAll(database.mainDao().getAll());
+                            dataList.addAll(database.mainDao().getAllTime(startDate,endDate));
                         } else {
-                            dataList.addAll(database.mainDao().getAllType(type));
+                            dataList.addAll(database.mainDao().getAllTypeTime(type,startDate,endDate));
                         }
                         break;
                     case 1:
                         if (type == 3) {
-                            dataList.addAll(database.mainDao().getReplyAll());
+                            dataList.addAll(database.mainDao().getReplyAllTime(startDate,endDate));
                         } else {
-                            dataList.addAll(database.mainDao().getFilter(0,type));
+                            dataList.addAll(database.mainDao().getFilterTime(0,type,startDate,endDate));
                         }
                         break;
                     case 2:
                         if (type == 3) {
-                            dataList.addAll(database.mainDao().getNoReplyAll());
+                            dataList.addAll(database.mainDao().getNoReplyAllTime(startDate,endDate));
                         } else {
-                            dataList.addAll(database.mainDao().getFilter(1,type));
+                            dataList.addAll(database.mainDao().getFilterTime(1,type,startDate,endDate));
                         }
                         break;
                 }

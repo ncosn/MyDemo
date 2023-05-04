@@ -11,6 +11,12 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#09ACA2</color>
     <color name="colorBackground">#F3F3F3</color>
-
     <color name="colorDash">#8009ACA2</color>
+    <color name="textColor">#999999</color>
+    <color name="yellow">#FFAD0D</color>
+    <color name="red">#EC3F34</color>
+    <color name="light_green">#E6F7F6</color>
+    <color name="light_yello">#FFF8E9</color>
+    <color name="light_red">#FDEEED</color>
+    <color name="grey">#DFDFDF</color>
 </resources>
