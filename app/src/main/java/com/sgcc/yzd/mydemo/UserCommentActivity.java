@@ -159,7 +159,7 @@ public class UserCommentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Date date = new Date();
-                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 String time = dateFormat.format(date);
 
                 MainData d = new MainData();

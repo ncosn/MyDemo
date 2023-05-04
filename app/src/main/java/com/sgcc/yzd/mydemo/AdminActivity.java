@@ -179,7 +179,7 @@ public class AdminActivity extends AppCompatActivity {
                 dataList.clear();
                 String startDate = "", endDate;
                 Calendar cal = Calendar.getInstance();
-                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm");
+                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date now = cal.getTime();
                 endDate = dateFormat.format(now);
                 switch (time) {
