@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="11sp"
-        android:textColor="#747474"/>
+        android:textColor="@color/textColor3"/>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:textColor="#666666"/>
+                    android:textColor="@color/textColor2"/>
 
                 <Button
                     android:id="@+id/bt_detail"
@@ -117,7 +117,7 @@
                     android:layout_toEndOf="@+id/tv_admin_name"
                     android:text="回复："
                     android:textSize="12sp"
-                    android:textColor="#333333"/>
+                    android:textColor="@color/black"/>
                 <TextView
                     android:id="@+id/tv_reply"
                     android:layout_toEndOf="@+id/textview"
@@ -128,7 +128,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="12sp"
-                    android:textColor="#666666"/>
+                    android:textColor="@color/textColor2"/>
                 <Button
                     android:id="@+id/bt_edit"
                     android:layout_width="90dp"

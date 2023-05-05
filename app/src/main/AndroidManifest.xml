@@ -16,7 +16,7 @@
             android:exported="true"
             android:screenOrientation="landscape"/>
         <activity
-            android:name=".UserCommentSucces"
+            android:name=".UserCommentSuccess"
             android:exported="true"
             android:screenOrientation="landscape" />
         <activity

@@ -5,7 +5,7 @@
             <size android:width="17dp"
                 android:height="17dp" />
             <stroke android:width="0.5dp"
-                android:color="#666666"
+                android:color="@color/textColor2"
                 android:dashWidth="1dp"
                 android:dashGap="1dp"/>
             <solid android:color="#F3F3F3" />
@@ -18,7 +18,7 @@
                     <size android:width="17dp"
                         android:height="17dp" />
                     <stroke android:width="0.5dp"
-                        android:color="#666666"
+                        android:color="@color/textColor2"
                         android:dashWidth="1dp"
                         android:dashGap="1dp"/>
                     <solid android:color="@color/colorPrimary" />

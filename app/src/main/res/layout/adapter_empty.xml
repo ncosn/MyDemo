@@ -8,14 +8,14 @@
     <ImageView
         android:layout_width="179dp"
         android:layout_height="203dp"
-        android:src="@drawable/comment_empty" />
+        android:src="@mipmap/comment_empty" />
     <TextView
         android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="暂无留言内容，点击浮动按钮留言吧！"
         android:textSize="14sp"
-        android:textColor="#666666"/>
+        android:textColor="@color/textColor2"/>
 
 
 </LinearLayout>

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="暂无留言内容，让客户多多留言吧！"
         android:textSize="14sp"
-        android:textColor="#666666"/>
+        android:textColor="@color/textColor2"/>
 
 
 </LinearLayout>

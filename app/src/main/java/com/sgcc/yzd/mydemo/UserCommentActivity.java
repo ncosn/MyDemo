@@ -176,7 +176,7 @@ public class UserCommentActivity extends AppCompatActivity {
                 d.setMsg(etComment.getText().toString());
                 d.setIfReply(1);
                 database.mainDao().insert(d);
-                Intent intent = new Intent(UserCommentActivity.this, UserCommentSucces.class);
+                Intent intent = new Intent(UserCommentActivity.this, UserCommentSuccess.class);
                 startActivity(intent);
             }
         });

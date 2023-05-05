@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class UserCommentSucces extends AppCompatActivity {
+public class UserCommentSuccess extends AppCompatActivity {
 
     Toolbar toolbar;
     Button btBack;
@@ -34,7 +34,7 @@ public class UserCommentSucces extends AppCompatActivity {
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(UserCommentSucces.this,MainActivity.class);
+                Intent intent = new Intent(UserCommentSuccess.this,MainActivity.class);
                 startActivity(intent);
             }
         });

@@ -9,6 +9,6 @@
     </item>
     <item android:end="12dp">
         <bitmap android:gravity="end"
-            android:src="@drawable/arrow_down" />
+            android:src="@mipmap/ic_arrow_down" />
     </item>
 </layer-list>

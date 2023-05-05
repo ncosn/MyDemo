@@ -90,11 +90,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                             //0代表男,1代表女
                             case 0:
                                 viewHolder.imUser.setImageDrawable(context.getResources()
-                                        .getDrawable(R.drawable.user_male));
+                                        .getDrawable(R.mipmap.avatar2));
                                 break;
                             case 1:
                                 viewHolder.imUser.setImageDrawable(context.getResources().
-                                        getDrawable(R.drawable.user_female));
+                                        getDrawable(R.mipmap.avatar1));
                                 break;
                         }
                         name = data.getName();
@@ -102,7 +102,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         break;
                     case 1:
                         viewHolder.imUser.setImageDrawable(context.getResources()
-                                .getDrawable(R.drawable.user_anonymous));
+                                .getDrawable(R.mipmap.avatar3));
                         name = ANONYMOUS_NAME;
                         viewHolder.tvName.setText(name);
                         break;

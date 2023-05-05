@@ -80,7 +80,7 @@
                         android:id="@+id/tv_name"
                         android:text="客户姓名 :"
                         android:textSize="13sp"
-                        android:textColor="#333333"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <EditText
@@ -98,7 +98,7 @@
                         android:layout_marginEnd="14.5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#333333"
+                        android:textColor="@color/black"
                         android:text="性别 :"/>
                     <RadioGroup
                         android:id="@+id/rg_sex"
@@ -111,7 +111,7 @@
                             android:button="@null"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#666666"
+                            android:textColor="@color/textColor2"
                             android:text="男"
                             android:drawableStart="@drawable/border_rb_rect"
                             android:drawablePadding="10dp"/>
@@ -123,21 +123,22 @@
                             android:drawablePadding="10dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#666666"
+                            android:textColor="@color/textColor2"
                             android:text="女" />
                     </RadioGroup>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
                     <TextView
                         android:id="@+id/tv_tel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="联系方式 :"
                         android:textSize="13sp"
-                        android:textColor="#333333"/>
+                        android:textColor="@color/black"/>
                     <EditText
                         android:id="@+id/et_tel"
                         android:layout_marginStart="14.5dp"
@@ -249,7 +250,7 @@
                     android:layout_marginBottom="10dp"
                     android:text="0/500"
                     android:textSize="12sp"
-                    android:textColor="#999999"
+                    android:textColor="@color/textColor"
                     android:layout_alignBottom="@+id/et_comment"
                     android:layout_alignEnd="@+id/et_comment" />
             </RelativeLayout>

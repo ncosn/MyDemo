@@ -83,18 +83,18 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                             //0代表男,1代表女
                             case 0:
                                 viewHolder.imUser.setImageDrawable(context.getResources()
-                                        .getDrawable(R.drawable.user_male));
+                                        .getDrawable(R.mipmap.avatar2));
                                 break;
                             case 1:
                                 viewHolder.imUser.setImageDrawable(context.getResources().
-                                        getDrawable(R.drawable.user_female));
+                                        getDrawable(R.mipmap.avatar1));
                                 break;
                         }
                         viewHolder.tvName.setText(name);
                         break;
                     case 1:
                         viewHolder.imUser.setImageDrawable(context.getResources()
-                                .getDrawable(R.drawable.user_anonymous));
+                                .getDrawable(R.mipmap.avatar3));
                         viewHolder.tvName.setText(ANONYMOUS_NAME);
                         break;
                 }

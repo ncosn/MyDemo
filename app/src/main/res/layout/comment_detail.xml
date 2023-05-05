@@ -29,13 +29,13 @@
                     android:layout_height="wrap_content"
                     android:text="客户姓名："
                     android:textSize="13sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/black" />
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/textColor2" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="12dp"
@@ -47,13 +47,13 @@
                     android:layout_height="wrap_content"
                     android:text="联系方式："
                     android:textSize="13sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/black" />
                 <TextView
                     android:id="@+id/tv_tel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/textColor2" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="12dp"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="留言类型："
                     android:textSize="13sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/black" />
                 <TextView
                     android:id="@+id/tv_type"
                     android:layout_width="65dp"
@@ -85,13 +85,13 @@
                     android:layout_height="wrap_content"
                     android:text="留言时间："
                     android:textSize="13sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/black" />
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/textColor2" />
             </LinearLayout>
             <LinearLayout
                 android:layout_marginTop="12dp"
@@ -103,13 +103,13 @@
                     android:layout_height="wrap_content"
                     android:text="留言内容："
                     android:textSize="13sp"
-                    android:textColor="#333333" />
+                    android:textColor="@color/black" />
                 <TextView
                     android:id="@+id/tv_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/textColor2" />
             </LinearLayout>
 
             <TextView
@@ -141,7 +141,7 @@
                     android:layout_marginBottom="10dp"
                     android:text="0/500"
                     android:textSize="12sp"
-                    android:textColor="#999999"
+                    android:textColor="@color/textColor"
                     android:layout_alignBottom="@+id/et_reply"
                     android:layout_alignEnd="@+id/et_reply" />
             </RelativeLayout>
