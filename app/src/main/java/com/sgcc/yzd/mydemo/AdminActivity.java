@@ -154,7 +154,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 time = i;
-                Log.e("test",""+i);
+//                Log.e("test",""+i);
             }
 
             @Override

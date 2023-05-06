@@ -98,17 +98,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="留言内容："
-                    android:textSize="13sp"
-                    android:textColor="@color/black" />
+
                 <TextView
                     android:id="@+id/tv_comment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
+                    android:lineSpacingMultiplier="1.5"
                     android:textColor="@color/textColor2" />
             </LinearLayout>
 
@@ -130,8 +126,10 @@
                     android:background="@drawable/border_et_radius"
                     android:gravity="top|left"
                     android:hint="请输入您的留言吧"
+                    android:lineSpacingMultiplier="1.2"
                     android:paddingHorizontal="15dp"
                     android:paddingTop="9.5dp"
+                    android:paddingBottom="10dp"
                     android:textSize="12sp"/>
                 <TextView
                     android:id="@+id/tv_words_num"
@@ -163,6 +161,7 @@
                     android:layout_width="160dp"
                     android:layout_height="30dp"
                     android:hint="请输入回复人称呼"
+                    android:maxLength="10"
                     android:textSize="12sp"
                     android:background="@drawable/border_et_radius"/>
             </LinearLayout>

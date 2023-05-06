@@ -1,6 +1,7 @@
 package com.sgcc.yzd.mydemo;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +130,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                         viewHolder.relativeLayout.setVisibility(View.GONE);
                         break;
                 }
+
+//                Log.d("test", "onBindViewHolder: 验证是否重用:");
+//
+//                Log.d("test", "onBindViewHolder: 重用了"+viewHolder.tvName.getTag());
+//
+//                Log.d("test", "onBindViewHolder: 放入"+data.getID());
+//                viewHolder.tvName.setTag(data.getID());
         }
 
     }

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -42,6 +43,11 @@ public class UserCommentActivity extends AppCompatActivity {
 
     public static String TOOLBAR_TITLE = "客户意见留言";
     public static String WORDS_NUM = "/500";
+    public static String TOAST1 = "请输入客户姓名";
+    public static String TOAST2 = "请输入联系方式";
+    public static String TOAST3 = "请输入留言";
+    public static String FORMAT = "yyyy-MM-dd HH:mm";
+    public static String ANONYMOUS_NAME = "匿名用户";
     public static int TYPE_PRAISE = 0;
     public static int TYPE_ADVICE = 1;
     public static int TYPE_COMPLAIN = 2;
@@ -158,8 +164,18 @@ public class UserCommentActivity extends AppCompatActivity {
         btCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (status == 0 && etName.getText().toString().equals("")) {
+                    Toast.makeText(UserCommentActivity.this,TOAST1,Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (status == 0 && etTel.getText().toString().equals("")) {
+                    Toast.makeText(UserCommentActivity.this,TOAST2,Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (etComment.getText().toString().equals("")) {
+                    Toast.makeText(UserCommentActivity.this,TOAST3,Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 Date date = new Date();
-                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                SimpleDateFormat dateFormat= new SimpleDateFormat(FORMAT);
                 String time = dateFormat.format(date);
 
                 MainData d = new MainData();
@@ -171,6 +187,7 @@ public class UserCommentActivity extends AppCompatActivity {
                     d.setTel(etTel.getText().toString().trim());
                 } else {
                     d.setStatus(1);
+                    d.setName(ANONYMOUS_NAME);
                 }
                 d.setType(type);
                 d.setMsg(etComment.getText().toString());
