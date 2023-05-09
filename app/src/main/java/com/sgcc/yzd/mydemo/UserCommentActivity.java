@@ -119,6 +119,8 @@ public class UserCommentActivity extends AppCompatActivity {
                         status = STATUS_ANONYMOUS;
                         linearLayout.setVisibility(View.GONE);
                         break;
+                    default:
+                        break;
                 }
             }
         });
@@ -132,6 +134,8 @@ public class UserCommentActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_female:
                         sex = SEX_FEMALE;
+                        break;
+                    default:
                         break;
                 }
             }
@@ -149,6 +153,8 @@ public class UserCommentActivity extends AppCompatActivity {
                         break;
                     case R.id.rb_complain:
                         type = TYPE_COMPLAIN;
+                        break;
+                    default:
                         break;
                 }
             }
@@ -199,6 +205,7 @@ public class UserCommentActivity extends AppCompatActivity {
             }
         });
 
+        //留言编辑框滑动事件
         etComment.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -206,7 +213,7 @@ public class UserCommentActivity extends AppCompatActivity {
                 if ((view.getId() == R.id.et_comment)) {
                     //垂直方向上可以滚动
                     if(etComment.canScrollVertically(-1) || etComment.canScrollVertically(0)) {
-
+                        //请求父控件不拦截滑动事件
                         view.getParent().requestDisallowInterceptTouchEvent(true);
                         if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                             view.getParent().requestDisallowInterceptTouchEvent(false);

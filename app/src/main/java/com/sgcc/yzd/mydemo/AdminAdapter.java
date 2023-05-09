@@ -56,9 +56,9 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
     @Override
     public int getItemViewType(int position) {
         if(dataList.size()<=0){
-            return TYPE_EMPTY;
+            return TYPE_EMPTY;//空数据视图类型
         }
-        return TYPE_NORMAL;
+        return TYPE_NORMAL;//正常视图类型
     }
 
     @NonNull
@@ -68,11 +68,13 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
         View view;
         AdminAdapter.BaseViewHolder viewHolder;
         if (viewType == TYPE_EMPTY) {
+            //空数据布局
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_empty_admin,parent,false);
             viewHolder = new AdminAdapter.EmptyViewHolder(view);
             return viewHolder;
         } else {
+            //正常局部
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_list_admin,parent,false);
             viewHolder = new AdminAdapter.ViewHolder(view);
@@ -92,15 +94,17 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 MainData data = dataList.get(position);
                 database = RoomDB.getInstance(context);
                 viewHolder.tvTime.setText(data.getTime());
+                //判断是否实名
                 switch (data.getStatus()) {
-                    //0代表实名,1代表匿名
+                    //实名
                     case 0:
                         switch (data.getSex()) {
-                            //0代表男,1代表女
+                            //男性头像
                             case 0:
                                 viewHolder.imUser.setImageDrawable(context.getResources()
                                         .getDrawable(R.mipmap.avatar2));
                                 break;
+                            //女性头像
                             case 1:
                                 viewHolder.imUser.setImageDrawable(context.getResources().
                                         getDrawable(R.mipmap.avatar1));
@@ -110,7 +114,9 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         }
                         viewHolder.tvName.setText(data.getName());
                         break;
+                    //匿名
                     case 1:
+                        //匿名头像
                         viewHolder.imUser.setImageDrawable(context.getResources()
                                 .getDrawable(R.mipmap.avatar3));
                         viewHolder.tvName.setText(data.getName());
@@ -118,17 +124,21 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                     default:
                         break;
                 }
+                //判断留言类型
                 switch (data.getType()) {
+                    //表扬
                     case 0:
                         viewHolder.tvType.setText(PRAISE);
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_praise));
                         break;
+                    //建议
                     case 1:
                         viewHolder.tvType.setText(ADVICE);
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_advice));
                         break;
+                    //投诉
                     case 2:
                         viewHolder.tvType.setText(COMPLAIN);
                         viewHolder.tvType.setBackground(context.getResources()
@@ -139,7 +149,9 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 }
                 String msg = (data.getMsg()==null) ? "" : data.getMsg();
                 viewHolder.tvMsg.setText(msg);
+                //判断是否回复
                 switch (data.getIfReply()) {
+                    //已回复
                     case 0:
                         viewHolder.relativeLayout.setVisibility(View.VISIBLE);
                         String adminName = ADMIN_NAME + data.getAdminName();
@@ -147,18 +159,21 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         String reply = data.getReply();
                         viewHolder.tvReply.setText(reply);
                         break;
+                    //未回复
                     case 1:
                         viewHolder.relativeLayout.setVisibility(View.GONE);
                         break;
                     default:
                         break;
                 }
+                //查看详情点击事件
                 viewHolder.btDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         edit(data);
                     }
                 });
+                //重新编辑点击事件
                 viewHolder.btEdit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -271,6 +286,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 tvType.setBackground(context.getResources()
                         .getDrawable(R.drawable.border_type_complain));
                 break;
+            default:
+                break;
         }
 
         switch (data.getIfReply()) {
@@ -281,6 +298,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 etReply.setText(reply);
                 break;
             case 1:
+                break;
+            default:
                 break;
         }
 
@@ -313,6 +332,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
             }
         });
 
+        //回复编辑框滑动事件
         etReply.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -320,7 +340,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 if ((view.getId() == R.id.et_reply)) {
                     //垂直方向上可以滚动
                     if(etReply.canScrollVertically(-1) || etReply.canScrollVertically(0)) {
-
+                        //请求父控件不拦截滑动事件
                         view.getParent().requestDisallowInterceptTouchEvent(true);
                         if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
                             view.getParent().requestDisallowInterceptTouchEvent(false);

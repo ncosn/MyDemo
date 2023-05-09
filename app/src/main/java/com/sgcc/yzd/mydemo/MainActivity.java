@@ -81,11 +81,12 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(MainActivity.this,dataList);
         //Set adapter
         recyclerView.setAdapter(mainAdapter);
-//
+
 //        String len = "length:"+dataList.size();
 //
 //        Log.i("length", len);
 
+        //动态显示返回顶部按钮
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
@@ -103,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //管理员登录
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //返回顶部点击事件
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //留言点击事件
         btLeave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

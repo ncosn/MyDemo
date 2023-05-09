@@ -40,9 +40,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public int getItemViewType(int position) {
         if(dataList.size()<=0){
-            return TYPE_EMPTY;
+            return TYPE_EMPTY;//空数据视图类型
         }
-        return  TYPE_NORMAL;
+        return  TYPE_NORMAL;//正常视图类型
     }
 
     @NonNull
@@ -52,11 +52,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
         View view;
         BaseViewHolder viewHolder;
         if (viewType == TYPE_EMPTY) {
+            //空数据布局
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_empty,parent,false);
             viewHolder = new EmptyViewHolder(view);
             return viewHolder;
         } else {
+            //正常布局
             view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.adapter_list_user,parent,false);
             viewHolder = new ViewHolder(view);
@@ -77,8 +79,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                 database = RoomDB.getInstance(context);
                 viewHolder.tvTime.setText(data.getTime());
                 String name = data.getName();
+                //判断是否实名
                 switch (data.getStatus()) {
-                    //0代表实名,1代表匿名
+                    //实名
                     case 0:
                         switch (data.getSex()) {
                             //0代表男,1代表女
@@ -90,35 +93,48 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                                 viewHolder.imUser.setImageDrawable(context.getResources().
                                         getDrawable(R.mipmap.avatar1));
                                 break;
+                            default:
+                                break;
                         }
                         viewHolder.tvName.setText(name);
                         break;
+                    //匿名
                     case 1:
                         viewHolder.imUser.setImageDrawable(context.getResources()
                                 .getDrawable(R.mipmap.avatar3));
                         viewHolder.tvName.setText(ANONYMOUS_NAME);
                         break;
+                    default:
+                        break;
                 }
+                //判断类型
                 switch (data.getType()) {
+                    //表扬
                     case 0:
                         viewHolder.tvType.setText(PRAISE);
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_praise));
                         break;
+                    //建议
                     case 1:
                         viewHolder.tvType.setText(ADVICE);
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_advice));
                         break;
+                    //投诉
                     case 2:
                         viewHolder.tvType.setText(COMPLAIN);
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_complain));
                         break;
+                    default:
+                        break;
                 }
                 String msg = data.getMsg();
                 viewHolder.tvMsg.setText((msg==null) ? "" : msg);
+                //判断是否回复
                 switch (data.getIfReply()) {
+                    //已回复
                     case 0:
                         viewHolder.relativeLayout.setVisibility(View.VISIBLE);
                         String adminName = ADMIN_NAME + data.getAdminName();
@@ -126,8 +142,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                         String reply = data.getReply();
                         viewHolder.tvReply.setText(reply);
                         break;
+                    //未回复
                     case 1:
                         viewHolder.relativeLayout.setVisibility(View.GONE);
+                        break;
+                    default:
                         break;
                 }
 
@@ -144,7 +163,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public int getItemCount() {
         if (dataList.size() <= 0) {
-            return 1;
+            return 1;//无数据
         } else {
             return dataList.size();
         }

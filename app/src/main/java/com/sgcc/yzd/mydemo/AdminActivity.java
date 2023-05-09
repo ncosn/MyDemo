@@ -232,36 +232,7 @@ public class AdminActivity extends AppCompatActivity {
                 }
                 //筛选
                 dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate));
-//                //筛选是否回复
-//                switch (ifReply) {
-//                    //全部消息
-//                    case 0:
-//                        //是否选择留言类型（表扬、建议、投诉）
-//                        if (type == 3) {//未选择留言类型
-//                            dataList.addAll(database.mainDao().getAllTime(startDate,endDate));
-//                        } else {
-//                            dataList.addAll(database.mainDao().getAllTypeTime(type,startDate,endDate));
-//                        }
-//                        break;
-//                    //已回复
-//                    case 1:
-//                        if (type == 3) {
-//                            dataList.addAll(database.mainDao().getReplyAllTime(startDate,endDate));
-//                        } else {
-//                            dataList.addAll(database.mainDao().getFilterTime(0,type,startDate,endDate));
-//                        }
-//                        break;
-//                    //未回复
-//                    case 2:
-//                        if (type == 3) {
-//                            dataList.addAll(database.mainDao().getNoReplyAllTime(startDate,endDate));
-//                        } else {
-//                            dataList.addAll(database.mainDao().getFilterTime(1,type,startDate,endDate));
-//                        }
-//                        break;
-//                    default:
-//                        break;
-//                }
+
                 adminAdapter.notifyDataSetChanged();//更新列表
             }
         });
