@@ -242,7 +242,7 @@
                     android:background="@drawable/border_et_radius"
                     android:gravity="top|left"
                     android:hint="请输入您的留言吧"
-                    android:lineSpacingMultiplier="1.5"
+                    android:lineSpacingMultiplier="1.2"
                     android:paddingHorizontal="15dp"
                     android:paddingTop="9.5dp"
                     android:textSize="12sp" />
