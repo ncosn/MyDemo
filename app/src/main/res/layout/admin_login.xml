@@ -35,6 +35,8 @@
 
     <EditText
         android:id="@+id/et_password"
+        android:inputType="numberPassword"
+        android:maxLength="6"
         android:layout_marginTop="30dp"
         android:layout_width="230dp"
         android:layout_height="42dp"

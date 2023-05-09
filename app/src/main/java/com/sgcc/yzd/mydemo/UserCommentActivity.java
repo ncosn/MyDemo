@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -195,6 +196,24 @@ public class UserCommentActivity extends AppCompatActivity {
                 database.mainDao().insert(d);
                 Intent intent = new Intent(UserCommentActivity.this, UserCommentSuccess.class);
                 startActivity(intent);
+            }
+        });
+
+        etComment.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+                if ((view.getId() == R.id.et_comment)) {
+                    //垂直方向上可以滚动
+                    if(etComment.canScrollVertically(-1) || etComment.canScrollVertically(0)) {
+
+                        view.getParent().requestDisallowInterceptTouchEvent(true);
+                        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                    }
+                }
+                return false;
             }
         });
 

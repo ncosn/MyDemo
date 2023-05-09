@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -104,6 +105,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                                 viewHolder.imUser.setImageDrawable(context.getResources().
                                         getDrawable(R.mipmap.avatar1));
                                 break;
+                            default:
+                                break;
                         }
                         viewHolder.tvName.setText(data.getName());
                         break;
@@ -111,6 +114,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         viewHolder.imUser.setImageDrawable(context.getResources()
                                 .getDrawable(R.mipmap.avatar3));
                         viewHolder.tvName.setText(data.getName());
+                        break;
+                    default:
                         break;
                 }
                 switch (data.getType()) {
@@ -129,6 +134,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         viewHolder.tvType.setBackground(context.getResources()
                                 .getDrawable(R.drawable.border_type_complain));
                         break;
+                    default:
+                        break;
                 }
                 String msg = (data.getMsg()==null) ? "" : data.getMsg();
                 viewHolder.tvMsg.setText(msg);
@@ -143,6 +150,8 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                     case 1:
                         viewHolder.relativeLayout.setVisibility(View.GONE);
                         break;
+                    default:
+                        break;
                 }
                 viewHolder.btDetail.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -156,7 +165,9 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         edit(data);
                     }
                 });
-
+                break;
+            default:
+                break;
         }
 
     }
@@ -301,6 +312,26 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 dialog.dismiss();
             }
         });
+
+        etReply.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                //触摸的是EditText并且当前EditText可以滚动则将事件交给EditText处理；否则将事件交由其父类处理
+                if ((view.getId() == R.id.et_reply)) {
+                    //垂直方向上可以滚动
+                    if(etReply.canScrollVertically(-1) || etReply.canScrollVertically(0)) {
+
+                        view.getParent().requestDisallowInterceptTouchEvent(true);
+                        if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                        }
+                    }
+                }
+                return false;
+            }
+        });
+
+        tvWordsNum.setText(etReply.getText().length() + WORDS_NUM);
 
         etReply.addTextChangedListener(new TextWatcher() {
             //记录输入的字数

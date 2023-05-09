@@ -29,7 +29,10 @@ import java.util.Date;
 import java.util.List;
 
 public class AdminActivity extends AppCompatActivity {
-    Integer ifReply=0, type=3, time = 0;
+
+    private int ifReply=2;//是否回复标志，0表示已回复，1表示未回复，2表示全部
+    private int type = 3;//类型标志，0表示表扬，1表示建议，2表示投诉，3表示全部
+    private int time = 0;//时间标志，0表示一周内，1表示一个月内，2表示三个月内，3表示一年内
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
@@ -45,6 +48,7 @@ public class AdminActivity extends AppCompatActivity {
     AdminAdapter adminAdapter;
 
     public static String TOOLBAR_TITLE = "电子意见簿 | 管理员";
+    public static String FORMAT = "yyyy-MM-dd HH:mm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,47 +81,60 @@ public class AdminActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        database = RoomDB.getInstance(this);
-        dataList = database.mainDao().getAll();
-        linearLayoutManager = new LinearLayoutManager(this);
+        database = RoomDB.getInstance(this);//初始化数据库
+        dataList = database.mainDao().getAll();//获取意见表所有数据
+        linearLayoutManager = new LinearLayoutManager(this);//创建并设置布局管理器
         recyclerView.setLayoutManager(linearLayoutManager);
-        adminAdapter = new AdminAdapter(AdminActivity.this,dataList);
-        recyclerView.setAdapter(adminAdapter);
+        adminAdapter = new AdminAdapter(AdminActivity.this,dataList);//初始化适配器
+        recyclerView.setAdapter(adminAdapter);//设置适配器
 
+        //筛选留言——是否回复
         rgIfReply.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    //全部
                     case R.id.rb_all:
+                        ifReply = 2;
+                        break;
+                    //已回复
+                    case R.id.rb_reply:
                         ifReply = 0;
                         break;
-                    case R.id.rb_reply:
+                    //未回复
+                    case R.id.rb_no_reply:
                         ifReply = 1;
                         break;
-                    case R.id.rb_no_reply:
-                        ifReply = 2;
+                    default:
                         break;
                 }
             }
         });
 
+        //筛选留言——类型
         rgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
+                    //表扬
                     case R.id.rb_praise:
                         type = 0;
                         break;
+                    //建议
                     case R.id.rb_advice:
                         type = 1;
                         break;
+                    //投诉
                     case R.id.rb_complain:
                         type = 2;
+                        break;
+                    default:
                         break;
                 }
             }
         });
 
+        //动态显示回到顶部按钮
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {
@@ -127,6 +144,7 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onScrolled(@NonNull @NotNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+                //第一个item不在屏幕内
                 if (recyclerView.getLayoutManager().findViewByPosition(0)==null) {
                     btTop.setVisibility(View.VISIBLE);
                 } else {
@@ -135,6 +153,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //管理员退出
         tvExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +162,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //回到顶部点击事件
         btTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,6 +170,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //时间下拉框点击事件
         spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -163,6 +184,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //清除筛选留言
         btClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,58 +195,74 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
+        //筛选留言
         btFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dataList.clear();
                 String startDate = "", endDate;
                 Calendar cal = Calendar.getInstance();
-                SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                SimpleDateFormat dateFormat= new SimpleDateFormat(FORMAT);
                 Date now = cal.getTime();
                 endDate = dateFormat.format(now);
+                //筛选时间
                 switch (time) {
+                    //一周内
                     case 0:
                         cal.add(Calendar.DATE, -7);
                         startDate = dateFormat.format(cal.getTime());
                         break;
+                    //一个月内
                     case 1:
                         cal.add(Calendar.MONTH, -1);
                         startDate = dateFormat.format(cal.getTime());
                         break;
+                    //三个月内
                     case 2:
                         cal.add(Calendar.MONTH, -3);
                         startDate = dateFormat.format(cal.getTime());
                         break;
+                    //一年内
                     case 3:
                         cal.add(Calendar.YEAR, -1);
                         startDate = dateFormat.format(cal.getTime());
                         break;
-                }
-                switch (ifReply) {
-                    case 0:
-                        //Notify when data is updated
-                        if (type == 3) {
-                            dataList.addAll(database.mainDao().getAllTime(startDate,endDate));
-                        } else {
-                            dataList.addAll(database.mainDao().getAllTypeTime(type,startDate,endDate));
-                        }
-                        break;
-                    case 1:
-                        if (type == 3) {
-                            dataList.addAll(database.mainDao().getReplyAllTime(startDate,endDate));
-                        } else {
-                            dataList.addAll(database.mainDao().getFilterTime(0,type,startDate,endDate));
-                        }
-                        break;
-                    case 2:
-                        if (type == 3) {
-                            dataList.addAll(database.mainDao().getNoReplyAllTime(startDate,endDate));
-                        } else {
-                            dataList.addAll(database.mainDao().getFilterTime(1,type,startDate,endDate));
-                        }
+                    default:
                         break;
                 }
-                adminAdapter.notifyDataSetChanged();
+                //筛选
+                dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate));
+//                //筛选是否回复
+//                switch (ifReply) {
+//                    //全部消息
+//                    case 0:
+//                        //是否选择留言类型（表扬、建议、投诉）
+//                        if (type == 3) {//未选择留言类型
+//                            dataList.addAll(database.mainDao().getAllTime(startDate,endDate));
+//                        } else {
+//                            dataList.addAll(database.mainDao().getAllTypeTime(type,startDate,endDate));
+//                        }
+//                        break;
+//                    //已回复
+//                    case 1:
+//                        if (type == 3) {
+//                            dataList.addAll(database.mainDao().getReplyAllTime(startDate,endDate));
+//                        } else {
+//                            dataList.addAll(database.mainDao().getFilterTime(0,type,startDate,endDate));
+//                        }
+//                        break;
+//                    //未回复
+//                    case 2:
+//                        if (type == 3) {
+//                            dataList.addAll(database.mainDao().getNoReplyAllTime(startDate,endDate));
+//                        } else {
+//                            dataList.addAll(database.mainDao().getFilterTime(1,type,startDate,endDate));
+//                        }
+//                        break;
+//                    default:
+//                        break;
+//                }
+                adminAdapter.notifyDataSetChanged();//更新列表
             }
         });
 
