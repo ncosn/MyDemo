@@ -45,6 +45,10 @@ public class AdminActivity extends AppCompatActivity {
      * 时间标志，0表示全部，1表示一周内，2表示一个月内，3表示三个月内，4表示一年内
      */
     private int time = 0;
+    /**
+     * 年龄标志，0表示全部，1表示25岁以下，2表示25-35岁，3表示35岁以上
+     */
+    private int age = 0;
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
@@ -52,6 +56,7 @@ public class AdminActivity extends AppCompatActivity {
     RadioButton rbAll, rbReply, rbNoReply, rbPraise, rbAdvice, rbComplain;
     Toolbar toolbar;
     Spinner spTime;
+    Spinner spAge;
 
     RoomDB database;
     RecyclerView recyclerView;
@@ -90,6 +95,7 @@ public class AdminActivity extends AppCompatActivity {
         rbComplain = findViewById(R.id.rb_complain);
 
         spTime = findViewById(R.id.sp_time);
+        spAge = findViewById(R.id.sp_age);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -187,12 +193,11 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        //时间下拉框点击事件
+        /* 时间下拉框点击事件 */
         spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 time = i;
-//                Log.e("test",""+i);
             }
 
             @Override
@@ -201,54 +206,79 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-        //清除筛选留言
+        /* 年龄下拉框点击事件 */
+        spAge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                age = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        /* 清除筛选留言 */
         btClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 rgType.clearCheck();
+                //留言类型设为全部
                 type = 3;
+                //是否回复设为全部
                 rgIfReply.check(R.id.rb_all);
+                //时间设为全部
                 spTime.setSelection(0);
+                //年龄设为全部
+                spAge.setSelection(0);
+                //清空list表
                 dataList.clear();
+                //数据库getAll()查询全部留言
                 dataList.addAll(database.mainDao().getAll());
                 //更新列表
                 adminAdapter.notifyDataSetChanged();
             }
         });
 
-        //筛选留言
+        /* 筛选留言 */
         btFilter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dataList.clear();
                 String startDate = "", endDate;
+                //获取Calendar类型的时间
                 Calendar cal = Calendar.getInstance();
+                //定义日期格式
                 SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT);
+                //获取Date类型的时间
                 Date now = cal.getTime();
+                //转换为字符串类型自定义格式时间
                 endDate = dateFormat.format(now);
-                //筛选时间
+                /*
+                根据时间time进行筛选：
+                0显示全部，startDate为当前时间减20年；
+                1显示一周内，startDate为当前时间减7天；
+                2显示一个月内，startDate为当前时间减1个月；
+                3显示一年内，startDate为当前时间减1年。
+                 */
                 switch (time) {
-                    //全部
                     case 0:
                         cal.add(Calendar.YEAR, -20);
                         startDate = dateFormat.format(cal.getTime());
                         break;
-                    //一周内
                     case 1:
                         cal.add(Calendar.DATE, -7);
                         startDate = dateFormat.format(cal.getTime());
                         break;
-                    //一个月内
                     case 2:
                         cal.add(Calendar.MONTH, -1);
                         startDate = dateFormat.format(cal.getTime());
                         break;
-                    //三个月内
                     case 3:
                         cal.add(Calendar.MONTH, -3);
                         startDate = dateFormat.format(cal.getTime());
                         break;
-                    //一年内
                     case 4:
                         cal.add(Calendar.YEAR, -1);
                         startDate = dateFormat.format(cal.getTime());
@@ -256,9 +286,8 @@ public class AdminActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                //筛选
+                //数据库getFilter()函数查询
                 dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate));
-
                 //更新列表
                 adminAdapter.notifyDataSetChanged();
             }
