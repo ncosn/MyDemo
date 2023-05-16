@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,197 +8,300 @@
 
     <include
         android:id="@+id/toolbar_main"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         layout="@layout/mytoolbar" />
 
 
     <TextView
         android:id="@+id/tv_exit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:clickable="true"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="35.5dp"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:layout_marginEnd="@dimen/spacing_35"
         android:gravity="center"
-        android:text="退出"
+        android:text="@string/textview_exit"
         android:textColor="@color/white"
-        android:textSize="11sp"
+        android:textSize="@dimen/font_11"
         android:drawableEnd="@mipmap/ic_exit"
         android:drawablePadding="5dp"
         android:layout_alignEnd="@+id/toolbar_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         />
-    <HorizontalScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/sv_filter"
-        android:layout_below="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:id="@+id/ll_picker"
-            android:layout_width="960dp"
-            android:layout_height="53dp"
-            android:gravity="center_vertical"
-            android:background="@color/white"
-            android:orientation="horizontal">
-            <TextView
-                android:paddingStart="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="状态："
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                />
-            <RadioGroup
-                android:id="@+id/rg_reply"
-                android:layout_width="195dp"
+        android:layout_height="53dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_main">
+
+        <TextView
+            android:id="@+id/tv_status"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_state"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rg_reply"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_reply"
+            app:layout_constraintHorizontal_weight="6"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border_rg"
+            android:checkedButton="@id/rb_all"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_divider1"
+            app:layout_constraintStart_toEndOf="@id/tv_status"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_all"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:background="@drawable/border_rg"
-                android:orientation="horizontal"
-                android:checkedButton="@id/rb_all">
-                <RadioButton
-                    android:button="@null"
-                    android:id="@+id/rb_all"
-                    android:background="@drawable/border_rb_style"
-                    android:layout_width="65dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="全部"
-                    android:textColor="@drawable/rb_color_check"/>
-                <RadioButton
-                    android:button="@null"
-                    android:id="@+id/rb_reply"
-                    android:background="@drawable/border_rb_style"
-                    android:layout_width="65dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:text="已回复"
-                    android:textColor="@drawable/rb_color_check"/>
-                <RadioButton
-                    android:button="@null"
-                    android:id="@+id/rb_no_reply"
-                    android:background="@drawable/border_rb_style"
-                    android:layout_width="65dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:textColor="@drawable/rb_color_check"
-                    android:text="未回复" />
-            </RadioGroup>
-            
-            <View
-                android:layout_marginStart="15dp"
-                android:layout_width="1dp"
-                android:layout_height="31dp"
-                android:background="@color/colorBackground"/>
+                android:background="@drawable/border_rb_style"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_all"
+                android:textColor="@drawable/rb_color_check" />
 
-            <TextView
-                android:paddingStart="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="类型："
-                android:textColor="@color/black"
-                android:textSize="13sp"
-                />
-            <RadioGroup
-                android:id="@+id/rg_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <RadioButton
-                    android:gravity="center"
-                    android:background="@drawable/border_rb_praise"
-                    android:button="@null"
-                    android:id="@+id/rb_praise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="表扬"
-                    android:textColor="@drawable/rb_color_praise"/>
-                <RadioButton
-                    android:layout_marginStart="10dp"
-                    android:id="@+id/rb_advice"
-                    android:background="@drawable/border_rb_advice"
-                    android:button="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="建议"
-                    android:textColor="@drawable/rb_color_advice"/>
-                <RadioButton
-                    android:layout_marginStart="10dp"
-                    android:id="@+id/rb_complain"
-                    android:background="@drawable/border_rb_complain"
-                    android:button="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="投诉"
-                    android:textColor="@drawable/rb_color_complain"/>
-            </RadioGroup>
-
-            <View
-                android:layout_marginStart="15dp"
-                android:layout_width="1dp"
-                android:layout_height="31dp"
-                android:background="@color/colorBackground"/>
-
-            <TextView
-                android:layout_marginStart="15dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:text="时间："/>
-
-            <Spinner
-                android:id="@+id/sp_time"
-                android:layout_width="128.5dp"
+            <RadioButton
+                android:id="@+id/rb_reply"
+                android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="30dp"
-                android:background="@drawable/border_sp_time"
-                android:entries="@array/spinner_time"
-                android:theme="@style/sp_time" />
+                android:background="@drawable/border_rb_style"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_reply"
+                android:textColor="@drawable/rb_color_check" />
 
-            <Button
-                android:layout_marginStart="39dp"
-                android:id="@+id/bt_clear"
-                android:layout_width="65dp"
-                android:layout_height="25dp"
-                android:textSize="13sp"
-                android:text="清除"
-                android:textColor="@color/colorPrimary"
-                android:background="@drawable/border_button_clear"/>
+            <RadioButton
+                android:id="@+id/rb_no_reply"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:background="@drawable/border_rb_style"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_no_reply"
+                android:textColor="@drawable/rb_color_check" />
+        </RadioGroup>
 
-            <Button
-                android:id="@+id/bt_filter"
-                android:layout_width="56dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="29dp"
-                android:background="@drawable/border_button_filter"
-                android:text="筛选"
-                android:textColor="@color/white"
-                android:textSize="13sp" />
+        <View
+            android:id="@+id/view_divider1"
+            android:layout_width="1dp"
+            android:layout_height="31dp"
+            android:background="@color/colorBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_type"
+            app:layout_constraintStart_toEndOf="@id/rg_reply"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
-    </HorizontalScrollView>
+        <TextView
+            android:id="@+id/tv_type"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_type"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rg_type"
+            app:layout_constraintStart_toEndOf="@id/view_divider1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_type"
+            app:layout_constraintHorizontal_weight="6"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/view_divider2"
+            app:layout_constraintStart_toEndOf="@id/tv_type"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioButton
+                android:id="@+id/rb_praise"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_rb_praise"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_praise"
+                android:textColor="@drawable/rb_color_praise" />
+
+            <RadioButton
+                android:id="@+id/rb_advice"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_rb_advice"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_advice"
+                android:textColor="@drawable/rb_color_advice" />
+
+            <RadioButton
+                android:id="@+id/rb_complain"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_rb_complain"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/radiobutton_complain"
+                android:textColor="@drawable/rb_color_complain" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view_divider2"
+            android:layout_width="1dp"
+            android:layout_height="31dp"
+            android:background="@color/colorBackground"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintEnd_toStartOf="@id/tv_time"
+            app:layout_constraintStart_toEndOf="@id/rg_type"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_time"
+            android:textColor="@color/black"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sp_time"
+            app:layout_constraintStart_toEndOf="@id/view_divider2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/sp_time"
+            app:layout_constraintHorizontal_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border_sp_time"
+            android:entries="@array/spinner_time"
+            android:theme="@style/SpTime"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_age"
+            app:layout_constraintStart_toEndOf="@id/tv_time"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            app:layout_constraintHorizontal_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/textview_age"
+            android:textColor="@color/black"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sp_age"
+            app:layout_constraintStart_toEndOf="@id/sp_time"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+            android:id="@+id/sp_age"
+            app:layout_constraintHorizontal_weight="4"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border_sp_time"
+            android:entries="@array/spinner_time"
+            android:theme="@style/SpAge"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bt_clear"
+            app:layout_constraintStart_toEndOf="@id/tv_age"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_clear"
+            app:layout_constraintHorizontal_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:background="@drawable/border_button_clear"
+            android:text="@string/button_clear"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/bt_filter"
+            app:layout_constraintStart_toEndOf="@id/sp_age"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/bt_filter"
+            app:layout_constraintHorizontal_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="25dp"
+            android:background="@drawable/border_button_filter"
+            android:text="@string/button_filter"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/bt_clear"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
+        app:layout_constraintTop_toBottomOf="@id/sv_filter"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_below="@id/sv_filter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:background="@color/colorBackground"
         tools:listitem="@layout/adapter_list_admin"/>
 
     <Button
         android:id="@+id/bt_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"
         android:paddingStart="28.5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
         android:layout_width="130dp"
         android:layout_height="28.8dp"
         android:background="@color/colorPrimaryLight"
-        android:text="@string/backToTop"
+        android:text="@string/back_to_top"
         android:textColor="@color/white"
         android:drawableStart="@mipmap/ic_top"
         android:drawablePadding="-18dp"/>
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

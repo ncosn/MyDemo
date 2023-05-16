@@ -28,11 +28,23 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author 86181
+ */
 public class AdminActivity extends AppCompatActivity {
 
-    private int ifReply=2;//是否回复标志，0表示已回复，1表示未回复，2表示全部
-    private int type = 3;//类型标志，0表示表扬，1表示建议，2表示投诉，3表示全部
-    private int time = 0;//时间标志，0表示一周内，1表示一个月内，2表示三个月内，3表示一年内
+    /**
+     * 是否回复标志，0表示已回复，1表示未回复，2表示全部
+     */
+    private int ifReply=2;
+    /**
+     * 类型标志，0表示表扬，1表示建议，2表示投诉，3表示全部
+     */
+    private int type = 3;
+    /**
+     * 时间标志，0表示全部，1表示一周内，2表示一个月内，3表示三个月内，4表示一年内
+     */
+    private int time = 0;
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
@@ -81,12 +93,17 @@ public class AdminActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
 
-        database = RoomDB.getInstance(this);//初始化数据库
-        dataList = database.mainDao().getAll();//获取意见表所有数据
-        linearLayoutManager = new LinearLayoutManager(this);//创建并设置布局管理器
+        //初始化数据库
+        database = RoomDB.getInstance(this);
+        //获取意见表所有数据
+        dataList = database.mainDao().getAll();
+        //创建并设置布局管理器
+        linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adminAdapter = new AdminAdapter(AdminActivity.this,dataList);//初始化适配器
-        recyclerView.setAdapter(adminAdapter);//设置适配器
+        //初始化适配器
+        adminAdapter = new AdminAdapter(AdminActivity.this,dataList);
+        //设置适配器
+        recyclerView.setAdapter(adminAdapter);
 
         //筛选留言——是否回复
         rgIfReply.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -192,6 +209,10 @@ public class AdminActivity extends AppCompatActivity {
                 type = 3;
                 rgIfReply.check(R.id.rb_all);
                 spTime.setSelection(0);
+                dataList.clear();
+                dataList.addAll(database.mainDao().getAll());
+                //更新列表
+                adminAdapter.notifyDataSetChanged();
             }
         });
 
@@ -202,28 +223,33 @@ public class AdminActivity extends AppCompatActivity {
                 dataList.clear();
                 String startDate = "", endDate;
                 Calendar cal = Calendar.getInstance();
-                SimpleDateFormat dateFormat= new SimpleDateFormat(FORMAT);
+                SimpleDateFormat dateFormat = new SimpleDateFormat(FORMAT);
                 Date now = cal.getTime();
                 endDate = dateFormat.format(now);
                 //筛选时间
                 switch (time) {
-                    //一周内
+                    //全部
                     case 0:
+                        cal.add(Calendar.YEAR, -20);
+                        startDate = dateFormat.format(cal.getTime());
+                        break;
+                    //一周内
+                    case 1:
                         cal.add(Calendar.DATE, -7);
                         startDate = dateFormat.format(cal.getTime());
                         break;
                     //一个月内
-                    case 1:
+                    case 2:
                         cal.add(Calendar.MONTH, -1);
                         startDate = dateFormat.format(cal.getTime());
                         break;
                     //三个月内
-                    case 2:
+                    case 3:
                         cal.add(Calendar.MONTH, -3);
                         startDate = dateFormat.format(cal.getTime());
                         break;
                     //一年内
-                    case 3:
+                    case 4:
                         cal.add(Calendar.YEAR, -1);
                         startDate = dateFormat.format(cal.getTime());
                         break;
@@ -233,7 +259,8 @@ public class AdminActivity extends AppCompatActivity {
                 //筛选
                 dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate));
 
-                adminAdapter.notifyDataSetChanged();//更新列表
+                //更新列表
+                adminAdapter.notifyDataSetChanged();
             }
         });
 

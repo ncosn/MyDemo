@@ -43,7 +43,9 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
     public static String TOAST1 = "请输入称呼";
     public static String TOAST2 = "请输入留言";
 
-    //类型，用此来判断recyclerview该用哪个布局显示
+    /**
+     * 类型，用此来判断recyclerview该用哪个布局显示
+     */
     public final int TYPE_EMPTY = 0;
     public final int TYPE_NORMAL = 1;
 
@@ -56,9 +58,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
     @Override
     public int getItemViewType(int position) {
         if(dataList.size()<=0){
-            return TYPE_EMPTY;//空数据视图类型
+            //空数据视图类型
+            return TYPE_EMPTY;
         }
-        return TYPE_NORMAL;//正常视图类型
+        //正常视图类型
+        return TYPE_NORMAL;
     }
 
     @NonNull
@@ -101,13 +105,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                         switch (data.getSex()) {
                             //男性头像
                             case 0:
-                                viewHolder.imUser.setImageDrawable(context.getResources()
-                                        .getDrawable(R.mipmap.avatar2));
+                                viewHolder.imUser.setImageResource(R.mipmap.avatar2);
                                 break;
                             //女性头像
                             case 1:
-                                viewHolder.imUser.setImageDrawable(context.getResources().
-                                        getDrawable(R.mipmap.avatar1));
+                                viewHolder.imUser.setImageResource(R.mipmap.avatar1);
                                 break;
                             default:
                                 break;
@@ -117,8 +119,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                     //匿名
                     case 1:
                         //匿名头像
-                        viewHolder.imUser.setImageDrawable(context.getResources()
-                                .getDrawable(R.mipmap.avatar3));
+                        viewHolder.imUser.setImageResource(R.mipmap.avatar3);
                         viewHolder.tvName.setText(data.getName());
                         break;
                     default:

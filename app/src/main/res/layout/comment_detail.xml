@@ -1,197 +1,225 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="40dp"
-    android:orientation="vertical">
-    <TextView
-        android:layout_marginTop="30dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="留言详情"
-        android:textColor="@color/colorPrimary"
-        android:textSize="18sp"/>
-    <ScrollView
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="40dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <TextView
+            android:id="@+id/tv_detail"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_name_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留言详情"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"/>
+        <TextView
+            app:layout_constraintTop_toBottomOf="@+id/tv_detail"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tel_bold"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="19.5dp"
+            android:id="@+id/tv_name_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="客户姓名："
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name_bold"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/textColor2" />
+
+        <TextView
+            android:id="@+id/tv_tel_bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name_bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_type_bold"
+            app:layout_constraintStart_toStartOf="@+id/tv_name_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="联系方式："
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/tv_tel"
+            app:layout_constraintTop_toTopOf="@+id/tv_tel_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tel_bold"
+            app:layout_constraintLeft_toRightOf="@+id/tv_tel_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/textColor2" />
+        <TextView
+            android:id="@+id/tv_type_bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_tel_bold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tel_bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_time_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留言类型："
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/tv_type"
+            app:layout_constraintStart_toEndOf="@+id/tv_type_bold"
+            app:layout_constraintTop_toTopOf="@+id/tv_type_bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_type_bold"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_time_bold"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_type_bold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_type_bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="留言时间："
+            android:textSize="13sp"
+            android:textColor="@color/black" />
+        <TextView
+            android:id="@+id/tv_time"
+            app:layout_constraintStart_toEndOf="@+id/tv_time_bold"
+            app:layout_constraintTop_toTopOf="@+id/tv_time_bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_time_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/textColor2" />
+
+        <TextView
+            android:id="@+id/tv_comment"
+            android:layout_marginTop="12dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_time_bold"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time_bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:lineSpacingMultiplier="1.5"
+            android:textColor="@color/textColor2" />
+
+        <TextView
+            android:id="@+id/tv_reply"
+            app:layout_constraintTop_toBottomOf="@+id/tv_comment"
+            app:layout_constraintBottom_toTopOf="@+id/et_reply"
+            app:layout_constraintStart_toStartOf="@+id/tv_comment"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复客户:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_reply"
+            app:layout_constraintTop_toBottomOf="@+id/tv_reply"
+            app:layout_constraintBottom_toTopOf="@+id/tv_call"
+            app:layout_constraintStart_toStartOf="@+id/tv_reply"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="14.5dp"
+            android:background="@drawable/border_et_radius"
+            android:gravity="top|left"
+            android:hint="请输入您的留言吧"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="9.5dp"
+            android:paddingBottom="10dp"
+            android:textSize="12sp"/>
+        <TextView
+            android:id="@+id/tv_words_num"
+            app:layout_constraintEnd_toEndOf="@+id/et_reply"
+            app:layout_constraintBottom_toBottomOf="@+id/et_reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            android:text="0/500"
+            android:textSize="12sp"
+            android:textColor="@color/textColor"
+            android:layout_alignBottom="@+id/et_reply"
+            android:layout_alignEnd="@+id/et_reply" />
+
+        <TextView
+            android:id="@+id/tv_call"
+            app:layout_constraintTop_toBottomOf="@+id/et_reply"
+            app:layout_constraintBottom_toTopOf="@+id/ll_button"
+            app:layout_constraintStart_toStartOf="@+id/et_reply"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="回复人姓名："
+            android:textSize="16dp"
+            android:textColor="@color/colorPrimary" />
+        <EditText
+            app:layout_constraintTop_toTopOf="@+id/tv_call"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_call"
+            app:layout_constraintStart_toEndOf="@id/tv_call"
+            android:id="@+id/et_call"
+            android:paddingHorizontal="10dp"
+            android:layout_width="160dp"
+            android:layout_height="30dp"
+            android:hint="请输入回复人称呼"
+            android:maxLength="10"
+            android:textSize="12sp"
+            android:background="@drawable/border_et_radius"/>
+
         <LinearLayout
+            android:id="@+id/ll_button"
+            android:layout_marginVertical="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_marginTop="19.5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="客户姓名："
-                    android:textSize="13sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/textColor2" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="联系方式："
-                    android:textSize="13sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/tv_tel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/textColor2" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="留言类型："
-                    android:textSize="13sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/tv_type"
-                    android:layout_width="65dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="10dp"
-                    android:gravity="center"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="留言时间："
-                    android:textSize="13sp"
-                    android:textColor="@color/black" />
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/textColor2" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_comment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:lineSpacingMultiplier="1.5"
-                    android:textColor="@color/textColor2" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="回复客户:"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/tv_call"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <Button
+                android:id="@+id/bt_back"
+                app:layout_constraintTop_toBottomOf="@id/tv_call"
+                app:layout_constraintEnd_toStartOf="@+id/bt_commit"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="130dp"
+                android:layout_height="37dp"
+                android:text="返回"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp" />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <EditText
-                    android:id="@+id/et_reply"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="14.5dp"
-                    android:background="@drawable/border_et_radius"
-                    android:gravity="top|left"
-                    android:hint="请输入您的留言吧"
-                    android:lineSpacingMultiplier="1.2"
-                    android:paddingHorizontal="15dp"
-                    android:paddingTop="9.5dp"
-                    android:paddingBottom="10dp"
-                    android:textSize="12sp"/>
-                <TextView
-                    android:id="@+id/tv_words_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="0/500"
-                    android:textSize="12sp"
-                    android:textColor="@color/textColor"
-                    android:layout_alignBottom="@+id/et_reply"
-                    android:layout_alignEnd="@+id/et_reply" />
-            </RelativeLayout>
+                android:background="@drawable/border_button_white" />
+            <Button
+                android:id="@+id/bt_commit"
+                app:layout_constraintTop_toTopOf="@+id/bt_back"
+                app:layout_constraintStart_toEndOf="@+id/bt_back"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="20dp"
+                android:layout_width="130dp"
+                android:layout_height="37dp"
+                android:text="提交"
+                android:textColor="@color/white"
+                android:background="@drawable/border_button_green"
+                />
 
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="回复人姓名："
-                    android:textSize="16dp"
-                    android:textColor="@color/colorPrimary" />
-                <EditText
-                    android:id="@+id/et_call"
-                    android:paddingHorizontal="10dp"
-                    android:layout_width="160dp"
-                    android:layout_height="30dp"
-                    android:hint="请输入回复人称呼"
-                    android:maxLength="10"
-                    android:textSize="12sp"
-                    android:background="@drawable/border_et_radius"/>
-            </LinearLayout>
-            <LinearLayout
-                android:paddingBottom="30dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp"
-                android:gravity="center">
-                <Button
-                    android:id="@+id/bt_back"
-                    android:layout_width="130dp"
-                    android:layout_height="37dp"
-                    android:text="返回"
-                    android:textColor="@color/colorPrimary"
-                    android:background="@drawable/border_button_white" />
-                <Button
-                    android:id="@+id/bt_commit"
-                    android:layout_marginStart="20dp"
-                    android:layout_width="130dp"
-                    android:layout_height="37dp"
-                    android:text="提交"
-                    android:textColor="@color/white"
-                    android:background="@drawable/border_button_green"
-                    />
-
-            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</ScrollView>

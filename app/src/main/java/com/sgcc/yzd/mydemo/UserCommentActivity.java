@@ -2,6 +2,7 @@ package com.sgcc.yzd.mydemo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.Group;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -20,6 +22,9 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author 86181
+ */
 public class UserCommentActivity extends AppCompatActivity {
     RoomDB database;
     Integer status, sex, type;
@@ -38,6 +43,10 @@ public class UserCommentActivity extends AppCompatActivity {
     LinearLayout linearLayout;
     Button btBack, btCommit;
 
+    /**
+     * 用户选择实名时的控件组
+     */
+    Group group;
     EditText etName, etTel, etComment;
     TextView tvTitle, tvName, tvSex, tvTel, tvWordsNum;
     Toolbar toolbar;
@@ -64,67 +73,69 @@ public class UserCommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_comment);
 
+        //防止自动弹出软键盘
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //绑定控件
         init();
+        //绑定事件
+        initEvent();
     }
 
     public void init() {
         //Initialize database
         database = RoomDB.getInstance(this);
-
         rgStatus = findViewById(R.id.rg_status);
         rbReal = findViewById(R.id.rb_real);
         rbAnonymous = findViewById(R.id.rb_anonymous);
-
         rgSex = findViewById(R.id.rg_sex);
         rbMale = findViewById(R.id.rb_male);
         rbFemale = findViewById(R.id.rb_female);
-
         rgType = findViewById(R.id.rg_type);
         rbPraise = findViewById(R.id.rb_praise);
         rbAdvice = findViewById(R.id.rb_advice);
         rbComplain = findViewById(R.id.rb_complain);
-
-        linearLayout = findViewById(R.id.ll_real);
-
-
         btBack = findViewById(R.id.bt_back);
         btCommit = findViewById(R.id.bt_commit);
-
         toolbar = findViewById(R.id.toolbar_main);
         tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText(TOOLBAR_TITLE);
-
         etName = (EditText) findViewById(R.id.et_name);
         etTel = (EditText) findViewById(R.id.et_tel);
         etComment = (EditText) findViewById(R.id.et_comment);
-
         tvWordsNum = findViewById(R.id.tv_words_num);
         tvName = findViewById(R.id.tv_name);
         tvSex = findViewById(R.id.tv_sex);
         tvTel = findViewById(R.id.tv_tel);
-
+        group = findViewById(R.id.group);
+        //初始化身份为实名
         status = STATUS_REAL;
+        //初始化性别为男
         sex = SEX_MALE;
+        //初始化类型为表扬
         type = TYPE_PRAISE;
+    }
 
+    public void initEvent() {
+        //身份单选框改变事件
         rgStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 switch (i) {
                     case R.id.rb_real:
                         status = STATUS_REAL;
-                        linearLayout.setVisibility(View.VISIBLE);
+                        //实名时显示控件组
+                        group.setVisibility(View.VISIBLE);
                         break;
                     case R.id.rb_anonymous:
                         status = STATUS_ANONYMOUS;
-                        linearLayout.setVisibility(View.GONE);
+                        //匿名实隐藏控件组
+                        group.setVisibility(View.GONE);
                         break;
                     default:
                         break;
                 }
             }
         });
-
         rgSex.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -140,7 +151,6 @@ public class UserCommentActivity extends AppCompatActivity {
                 }
             }
         });
-
         rgType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -159,7 +169,6 @@ public class UserCommentActivity extends AppCompatActivity {
                 }
             }
         });
-
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,17 +176,16 @@ public class UserCommentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         btCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (status == 0 && etName.getText().toString().equals("")) {
+                if (status == 0 && "".equals(etName.getText().toString())) {
                     Toast.makeText(UserCommentActivity.this,TOAST1,Toast.LENGTH_SHORT).show();
                     return;
-                } else if (status == 0 && etTel.getText().toString().equals("")) {
+                } else if (status == 0 && "".equals(etTel.getText().toString())) {
                     Toast.makeText(UserCommentActivity.this,TOAST2,Toast.LENGTH_SHORT).show();
                     return;
-                } else if (etComment.getText().toString().equals("")) {
+                } else if ("".equals(etComment.getText().toString())) {
                     Toast.makeText(UserCommentActivity.this,TOAST3,Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -204,7 +212,6 @@ public class UserCommentActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
         //留言编辑框滑动事件
         etComment.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -223,7 +230,6 @@ public class UserCommentActivity extends AppCompatActivity {
                 return false;
             }
         });
-
         etComment.addTextChangedListener(new TextWatcher() {
             //记录输入的字数
             private CharSequence enterWords;
@@ -234,13 +240,11 @@ public class UserCommentActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
-
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //实时记录输入的字数
                 enterWords= charSequence;
             }
-
             @Override
             public void afterTextChanged(Editable editable) {
                 //TextView显示字数

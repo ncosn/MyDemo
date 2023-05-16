@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,153 +8,146 @@
     android:layout_marginTop="30dp">
     <TextView
         android:id="@+id/tv_time"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="11sp"
         android:textColor="@color/textColor3"/>
-    <androidx.cardview.widget.CardView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toBottomOf="@+id/tv_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
+        android:background="@drawable/border_layout_radius"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="15dp"
         android:layout_marginTop="14.2dp">
-        <LinearLayout
+
+        <ImageView
+            android:id="@+id/im_user"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_name"
+            android:layout_width="37dp"
+            android:layout_height="37dp" />
+        <TextView
+            android:id="@+id/tv_name"
+            app:layout_constraintStart_toEndOf="@id/im_user"
+            app:layout_constraintTop_toTopOf="@id/im_user"
+            app:layout_constraintBottom_toBottomOf="@id/im_user"
+            app:layout_constraintEnd_toStartOf="@id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:paddingStart="10dp" />
+        <TextView
+            android:id="@+id/tv_type"
+            app:layout_constraintStart_toEndOf="@id/tv_name"
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="14dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            app:layout_constraintTop_toBottomOf="@id/im_user"
+            app:layout_constraintStart_toStartOf="@id/im_user"
+            android:layout_marginVertical="15dp"
+            android:layout_marginEnd="156dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="30dp"
-            android:paddingVertical="15dp">
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:id="@+id/ll_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:paddingBottom="15dp">
-                    <ImageView
-                        android:id="@+id/im_user"
-                        android:layout_width="37dp"
-                        android:layout_height="37dp" />
-                    <TextView
-                        android:id="@+id/tv_name"
+            android:textSize="12sp"
+            android:lineSpacingMultiplier="1.2"
+            android:textColor="@color/textColor2"/>
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:paddingStart="10dp" />
-                    <TextView
-                        android:id="@+id/tv_type"
-                        android:layout_width="65dp"
-                        android:layout_height="25dp"
-                        android:layout_marginStart="14dp"
-                        android:gravity="center"
-                        android:textColor="@color/white"
-                        android:textSize="13sp"
-                        />
+        <Button
+            android:id="@+id/bt_detail"
+            app:layout_constraintStart_toEndOf="@id/tv_msg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/ll_reply"
+            android:layout_width="90dp"
+            android:layout_height="27dp"
+            android:text="查看详情"
+            android:textColor="@color/colorPrimary"
+            android:textSize="12sp"
+            android:background="@drawable/border_button_detail"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" />
+        <RelativeLayout
+            android:id="@+id/ll_reply"
+            app:layout_constraintTop_toBottomOf="@id/tv_msg"
 
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_msg"
-                    android:layout_marginEnd="156dp"
-                    android:layout_below="@+id/ll_user"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="12sp"
-                    android:lineSpacingMultiplier="1.2"
-                    android:textColor="@color/textColor2"/>
-
-                <Button
-                    android:id="@+id/bt_detail"
-                    android:layout_width="90dp"
-                    android:layout_height="27dp"
-                    android:text="查看详情"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="12sp"
-                    android:background="@drawable/border_button_detail"
-
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/ll_reply"
-                android:visibility="visible"
-                android:paddingBottom="15dp"
-                android:layout_marginTop="14.5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#F9F9F9">
-
-                <ImageView
-                    android:id="@+id/im_admin"
-                    android:layout_marginTop="15.5dp"
-                    android:layout_marginStart="25dp"
-                    android:src="@mipmap/admin"
-                    android:layout_width="36.7dp"
-                    android:layout_height="36.7dp" />
-
-                <TextView
-                    android:id="@+id/tv_admin_name"
-
-                    android:layout_marginStart="11dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_toEndOf="@+id/im_admin"
-                    android:gravity="center"
-                    android:text=""
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="@color/colorPrimary" />
-                <TextView
-                    android:id="@+id/textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15.5dp"
-                    android:layout_marginTop="27.5dp"
-                    android:layout_toEndOf="@+id/tv_admin_name"
-                    android:text="回复："
-
-                    android:textSize="12sp"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/tv_reply"
-                    android:layout_toEndOf="@+id/textview"
-                    android:layout_marginStart="9dp"
-                    android:layout_marginEnd="156dp"
-                    android:layout_marginTop="27.5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="12sp"
-                    android:textColor="@color/textColor2"/>
-                <Button
-                    android:id="@+id/bt_edit"
-                    android:layout_width="90dp"
-                    android:layout_height="27dp"
-                    android:text="重新编辑"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:background="@drawable/border_button_edit"
-                    android:layout_marginEnd="20dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentEnd="true" />
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-        <androidx.cardview.widget.CardView
+            android:visibility="visible"
+            android:paddingBottom="15dp"
+            android:layout_marginTop="14.5dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_layout_grey">
 
-        </androidx.cardview.widget.CardView>
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/im_admin"
+                android:layout_marginTop="15.5dp"
+                android:layout_marginStart="25dp"
+                android:src="@mipmap/admin"
+                android:layout_width="36.7dp"
+                android:layout_height="36.7dp" />
+
+            <TextView
+                android:id="@+id/tv_admin_name"
+
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="25dp"
+                android:layout_toEndOf="@+id/im_admin"
+                android:gravity="center"
+                android:text=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimary" />
+            <TextView
+                android:id="@+id/textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15.5dp"
+                android:layout_marginTop="27.5dp"
+                android:layout_toEndOf="@+id/tv_admin_name"
+                android:text="回复："
+
+                android:textSize="12sp"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/tv_reply"
+                android:layout_toEndOf="@+id/textview"
+                android:layout_marginStart="9dp"
+                android:layout_marginEnd="156dp"
+                android:layout_marginTop="27.5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="12sp"
+                android:textColor="@color/textColor2"/>
+            <Button
+                android:id="@+id/bt_edit"
+                android:layout_width="90dp"
+                android:layout_height="27dp"
+                android:text="重新编辑"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:background="@drawable/border_button_edit"
+                android:layout_marginEnd="20dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

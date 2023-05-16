@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_11">11sp</dimen>
+    <dimen name="spacing_10">10dp</dimen>
+    <dimen name="spacing_35">35dp</dimen>
+
+</resources>

@@ -1,13 +1,33 @@
 <resources>
     <string name="app_name">MyDemo</string>
     <string name="thanks">留言成功，感谢您的留言!</string>
-    <string name="backToHome">返回主页</string>
-    <string name="leaveWord">留 言</string>
-    <string name="backToTop">返回顶部</string>
+    <string name="button_home">返回主页</string>
+    <string name="button_leave_word">留 言</string>
+    <string name="back_to_top">返回顶部</string>
+    <string name="textview_exit">退出</string>
+    <string name="textview_state">状态：</string>
+    <string name="radiobutton_all">全部</string>
+    <string name="radiobutton_reply">已回复</string>
+    <string name="radiobutton_no_reply">未回复</string>
+    <string name="textview_type">类型：</string>
+    <string name="radiobutton_praise">表扬</string>
+    <string name="radiobutton_advice">建议</string>
+    <string name="radiobutton_complain">投诉</string>
+    <string name="textview_time">时间：</string>
+    <string name="button_clear">清除</string>
+    <string name="button_filter">筛选</string>
+    <string name="textview_age">年龄：</string>
     <string-array name="spinner_time">
+        <item>全部</item>
         <item>一周内</item>
         <item>一个月内</item>
         <item>三个月内</item>
         <item>一年内</item>
+    </string-array>
+    <string-array name="spinner_age">
+        <item>全部</item>
+        <item>25岁以下</item>
+        <item>25—35岁</item>
+        <item>35岁以上</item>
     </string-array>
 </resources>

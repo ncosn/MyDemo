@@ -18,8 +18,8 @@
     <color name="yellow">#FFAD0D</color>
     <color name="red">#EC3F34</color>
     <color name="colorPrimaryLight">#71CFC9</color>
-    <color name="light_green">#E6F7F6</color>
-    <color name="light_yellow">#FFF8E9</color>
-    <color name="light_red">#FDEEED</color>
+    <color name="green_light">#E6F7F6</color>
+    <color name="yellow_light">#FFF8E9</color>
+    <color name="red_light">#FDEEED</color>
     <color name="grey">#DFDFDF</color>
 </resources>
