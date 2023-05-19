@@ -5,20 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.Database;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,22 +29,17 @@ import java.util.List;
  */
 public class AdminActivity extends AppCompatActivity {
 
-    /**
-     * 是否回复标志，0表示已回复，1表示未回复，2表示全部
-     */
+    /**是否回复标志，0表示已回复，1表示未回复，2表示全部*/
     private int ifReply=2;
-    /**
-     * 类型标志，0表示表扬，1表示建议，2表示投诉，3表示全部
-     */
+
+    /**类型标志，0表示表扬，1表示建议，2表示投诉，3表示全部*/
     private int type = 3;
-    /**
-     * 时间标志，0表示全部，1表示一周内，2表示一个月内，3表示三个月内，4表示一年内
-     */
+
+    /**时间标志，0表示全部，1表示一周内，2表示一个月内，3表示三个月内，4表示一年内*/
     private int time = 0;
-    /**
-     * 年龄标志，0表示全部，1表示25岁以下，2表示25-35岁，3表示35岁以上
-     */
-    private int age = 0;
+
+    /**服务标志，0表示住宅，1表示电动车，2表示店铺，3表示企事业，4表示新能源，5表示其他，6表示全部*/
+    private int service = 6;
 
     TextView tvExit,tvTitle;
     Button btClear, btFilter, btTop;
@@ -56,7 +47,7 @@ public class AdminActivity extends AppCompatActivity {
     RadioButton rbAll, rbReply, rbNoReply, rbPraise, rbAdvice, rbComplain;
     Toolbar toolbar;
     Spinner spTime;
-    Spinner spAge;
+    Spinner spService;
 
     RoomDB database;
     RecyclerView recyclerView;
@@ -95,7 +86,8 @@ public class AdminActivity extends AppCompatActivity {
         rbComplain = findViewById(R.id.rb_complain);
 
         spTime = findViewById(R.id.sp_time);
-        spAge = findViewById(R.id.sp_age);
+        spService = findViewById(R.id.sp_service);
+        spService.setSelection(6);
 
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -197,25 +189,27 @@ public class AdminActivity extends AppCompatActivity {
         spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                spTime.setSelection(i);
                 time = i;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                spTime.setSelection(0);
             }
         });
 
-        /* 年龄下拉框点击事件 */
-        spAge.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /* 服务下拉框点击事件 */
+        spService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                age = i;
+                spService.setSelection(i);
+                service = i;
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
+                spService.setSelection(6);
             }
         });
 
@@ -231,7 +225,7 @@ public class AdminActivity extends AppCompatActivity {
                 //时间设为全部
                 spTime.setSelection(0);
                 //年龄设为全部
-                spAge.setSelection(0);
+                spService.setSelection(6);
                 //清空list表
                 dataList.clear();
                 //数据库getAll()查询全部留言
@@ -287,7 +281,7 @@ public class AdminActivity extends AppCompatActivity {
                         break;
                 }
                 //数据库getFilter()函数查询
-                dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate));
+                dataList.addAll(database.mainDao().getFilter(ifReply,type,startDate,endDate,service));
                 //更新列表
                 adminAdapter.notifyDataSetChanged();
             }

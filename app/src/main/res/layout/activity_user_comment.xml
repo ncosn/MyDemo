@@ -17,7 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_main"
-        android:layout_width="match_parent"
+        app:layout_constraintWidth_percent="0.78"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="105dp"
         android:layout_marginTop="20dp"
@@ -80,7 +81,7 @@
             android:id="@+id/group"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:constraint_referenced_ids="tv_name,et_name,tv_sex,rg_sex,tv_tel,et_tel" />
+            app:constraint_referenced_ids="tv_name,et_name,tv_sex,rg_sex,tv_tel,et_tel,tv_age,et_age" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -107,19 +108,21 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_name"
             app:layout_constraintStart_toEndOf="@id/tv_name"
-            app:layout_constraintTop_toTopOf="@id/tv_name" />
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            app:layout_constraintEnd_toStartOf="@id/tv_sex"/>
 
         <TextView
             android:id="@+id/tv_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="14.5dp"
-            android:paddingStart="60dp"
+            android:layout_marginStart="60dp"
             android:text="性别 :"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@id/rg_sex"
             app:layout_constraintStart_toEndOf="@+id/et_name"
-            app:layout_constraintTop_toTopOf="@id/tv_name" />
+            app:layout_constraintTop_toTopOf="@id/tv_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_name"/>
 
         <RadioGroup
             android:id="@+id/rg_sex"
@@ -179,7 +182,37 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/tv_tel"
             app:layout_constraintStart_toEndOf="@id/tv_tel"
-            app:layout_constraintTop_toTopOf="@id/tv_tel" />
+            app:layout_constraintTop_toTopOf="@id/tv_tel"
+            app:layout_constraintEnd_toStartOf="@id/tv_age"/>
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="20dp"
+            android:text="年龄 :"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toStartOf="@+id/et_age"
+            app:layout_constraintStart_toEndOf="@id/et_tel"
+            app:layout_constraintTop_toBottomOf="@id/tv_tel"
+            app:layout_constraintBottom_toTopOf="@id/tv_tel"/>
+
+        <EditText
+            android:id="@+id/et_age"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="14.5dp"
+            android:background="@drawable/border_et_radius"
+            android:hint="请输入您的年龄"
+            android:inputType="number"
+            android:maxLength="2"
+            android:paddingStart="10dp"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_age"
+            app:layout_constraintStart_toEndOf="@id/tv_age"
+            app:layout_constraintTop_toTopOf="@id/tv_age" />
 
         <View
             android:id="@+id/view_divider1"
@@ -249,6 +282,28 @@
                 android:textColor="@drawable/rb_color_check"
                 android:textSize="13sp" />
         </RadioGroup>
+        <TextView
+            android:id="@+id/tv_service"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务类型 ："
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toEndOf="@id/rg_type"
+            app:layout_constraintTop_toTopOf="@id/tv_type"
+            app:layout_constraintBottom_toBottomOf="@id/tv_type"
+            app:layout_constraintEnd_toStartOf="@id/sp_service"
+            android:textSize="16sp" />
+
+        <Spinner
+            android:id="@+id/sp_service"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:background="@drawable/border_sp_time"
+            android:entries="@array/spinner_service"
+            android:theme="@style/SpService"
+            app:layout_constraintBottom_toBottomOf="@id/tv_service"
+            app:layout_constraintStart_toEndOf="@id/tv_service"
+            app:layout_constraintTop_toTopOf="@id/tv_service"/>
 
         <View
             android:id="@+id/view_divider2"

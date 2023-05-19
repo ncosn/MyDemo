@@ -203,34 +203,34 @@
             android:entries="@array/spinner_time"
             android:theme="@style/SpTime"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_age"
+            app:layout_constraintEnd_toStartOf="@id/tv_service"
             app:layout_constraintStart_toEndOf="@id/tv_time"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_age"
+            android:id="@+id/tv_service"
             app:layout_constraintHorizontal_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/textview_age"
+            android:text="@string/textview_service"
             android:textColor="@color/black"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/sp_age"
+            app:layout_constraintEnd_toStartOf="@id/sp_service"
             app:layout_constraintStart_toEndOf="@id/sp_time"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/sp_age"
+            android:id="@+id/sp_service"
             app:layout_constraintHorizontal_weight="4"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:background="@drawable/border_sp_time"
-            android:entries="@array/spinner_time"
-            android:theme="@style/SpAge"
+            android:entries="@array/spinner_service_filter"
+            android:theme="@style/SpService"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/bt_clear"
-            app:layout_constraintStart_toEndOf="@id/tv_age"
+            app:layout_constraintStart_toEndOf="@id/tv_service"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -244,7 +244,7 @@
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/bt_filter"
-            app:layout_constraintStart_toEndOf="@id/sp_age"
+            app:layout_constraintStart_toEndOf="@id/sp_service"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button

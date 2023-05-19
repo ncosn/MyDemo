@@ -27,7 +27,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     public static String COMPLAIN = "投诉";
     public static String ADMIN_NAME = "电网—";
 
-    //类型，用此来判断recyclerview该用哪个布局显示
+    /**
+     *类型，用此来判断recyclerview该用哪个布局显示
+     **/
     public final int TYPE_EMPTY = 0;
     public final int TYPE_NORMAL = 1;
 
@@ -40,9 +42,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public int getItemViewType(int position) {
         if(dataList.size()<=0){
-            return TYPE_EMPTY;//空数据视图类型
+            //空数据视图类型
+            return TYPE_EMPTY;
         }
-        return  TYPE_NORMAL;//正常视图类型
+        //正常视图类型
+        return  TYPE_NORMAL;
     }
 
     @NonNull
@@ -86,12 +90,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                         switch (data.getSex()) {
                             //0代表男,1代表女
                             case 0:
-                                viewHolder.imUser.setImageDrawable(context.getResources()
-                                        .getDrawable(R.mipmap.avatar2));
+                                viewHolder.imUser.setImageResource(R.mipmap.avatar2);
                                 break;
                             case 1:
-                                viewHolder.imUser.setImageDrawable(context.getResources().
-                                        getDrawable(R.mipmap.avatar1));
+                                viewHolder.imUser.setImageResource(R.mipmap.avatar1);
                                 break;
                             default:
                                 break;
@@ -100,8 +102,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                         break;
                     //匿名
                     case 1:
-                        viewHolder.imUser.setImageDrawable(context.getResources()
-                                .getDrawable(R.mipmap.avatar3));
+                        viewHolder.imUser.setImageResource(R.mipmap.avatar3);
                         viewHolder.tvName.setText(ANONYMOUS_NAME);
                         break;
                     default:
@@ -112,20 +113,17 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
                     //表扬
                     case 0:
                         viewHolder.tvType.setText(PRAISE);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_praise));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_praise);
                         break;
                     //建议
                     case 1:
                         viewHolder.tvType.setText(ADVICE);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_advice));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_advice);
                         break;
                     //投诉
                     case 2:
                         viewHolder.tvType.setText(COMPLAIN);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_complain));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_complain);
                         break;
                     default:
                         break;
@@ -155,7 +153,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
 //                Log.d("test", "onBindViewHolder: 重用了"+viewHolder.tvName.getTag());
 //
 //                Log.d("test", "onBindViewHolder: 放入"+data.getID());
+//
 //                viewHolder.tvName.setTag(data.getID());
+            default:
+                break;
         }
 
     }
@@ -163,7 +164,8 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.BaseViewHolder
     @Override
     public int getItemCount() {
         if (dataList.size() <= 0) {
-            return 1;//无数据
+            //无数据
+            return 1;
         } else {
             return dataList.size();
         }

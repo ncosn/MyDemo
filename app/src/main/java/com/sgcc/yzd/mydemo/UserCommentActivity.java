@@ -11,11 +11,13 @@ import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,12 @@ import java.util.Date;
  * @author 86181
  */
 public class UserCommentActivity extends AppCompatActivity {
+
+    /**
+     * 服务类型标志
+     * 0住宅、1动车、2店铺、3企事业、4新能源、5其他
+     */
+    int service = 0;
     RoomDB database;
     Integer status, sex, type;
 
@@ -47,15 +55,17 @@ public class UserCommentActivity extends AppCompatActivity {
      * 用户选择实名时的控件组
      */
     Group group;
-    EditText etName, etTel, etComment;
+    EditText etName, etTel, etComment, etAge;
     TextView tvTitle, tvName, tvSex, tvTel, tvWordsNum;
     Toolbar toolbar;
+    Spinner spService;
 
     public static String TOOLBAR_TITLE = "客户意见留言";
     public static String WORDS_NUM = "/500";
     public static String TOAST1 = "请输入客户姓名";
     public static String TOAST2 = "请输入联系方式";
     public static String TOAST3 = "请输入留言";
+    public static String TOAST4 = "请输入年龄";
     public static String FORMAT = "yyyy-MM-dd HH:mm";
     public static String ANONYMOUS_NAME = "匿名用户";
     public static int TYPE_PRAISE = 0;
@@ -99,14 +109,16 @@ public class UserCommentActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar_main);
         tvTitle = findViewById(R.id.tv_title);
         tvTitle.setText(TOOLBAR_TITLE);
-        etName = (EditText) findViewById(R.id.et_name);
-        etTel = (EditText) findViewById(R.id.et_tel);
-        etComment = (EditText) findViewById(R.id.et_comment);
+        etName = findViewById(R.id.et_name);
+        etTel = findViewById(R.id.et_tel);
+        etAge = findViewById(R.id.et_age);
+        etComment = findViewById(R.id.et_comment);
         tvWordsNum = findViewById(R.id.tv_words_num);
         tvName = findViewById(R.id.tv_name);
         tvSex = findViewById(R.id.tv_sex);
         tvTel = findViewById(R.id.tv_tel);
         group = findViewById(R.id.group);
+        spService = findViewById(R.id.sp_service);
         //初始化身份为实名
         status = STATUS_REAL;
         //初始化性别为男
@@ -169,6 +181,20 @@ public class UserCommentActivity extends AppCompatActivity {
                 }
             }
         });
+
+        spService.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                spService.setSelection(i);
+                service = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                spService.setSelection(0);
+            }
+        });
+
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,6 +214,9 @@ public class UserCommentActivity extends AppCompatActivity {
                 } else if ("".equals(etComment.getText().toString())) {
                     Toast.makeText(UserCommentActivity.this,TOAST3,Toast.LENGTH_SHORT).show();
                     return;
+                } else if (status == 0 && "".equals(etAge.getText().toString())) {
+                    Toast.makeText(UserCommentActivity.this,TOAST4,Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 Date date = new Date();
                 SimpleDateFormat dateFormat= new SimpleDateFormat(FORMAT);
@@ -200,13 +229,17 @@ public class UserCommentActivity extends AppCompatActivity {
                     d.setName(etName.getText().toString().trim());
                     d.setSex(sex);
                     d.setTel(etTel.getText().toString().trim());
+
+                    d.setAge(Integer.parseInt(etAge.getText().toString()));
                 } else {
                     d.setStatus(1);
                     d.setName(ANONYMOUS_NAME);
+                    d.setAge(20);
                 }
                 d.setType(type);
                 d.setMsg(etComment.getText().toString());
                 d.setIfReply(1);
+                d.setServcie(service);
                 database.mainDao().insert(d);
                 Intent intent = new Intent(UserCommentActivity.this, UserCommentSuccess.class);
                 startActivity(intent);

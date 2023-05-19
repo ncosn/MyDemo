@@ -1,8 +1,11 @@
 package com.sgcc.yzd.mydemo;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
@@ -42,6 +45,21 @@ public class MainData implements Serializable {
 
     @ColumnInfo(name = "reply")
     private String reply;
+
+    @ColumnInfo(name = "age", defaultValue = "20")
+    private int age;
+
+    @ColumnInfo(name = "service", defaultValue = "5")
+    @NotNull
+    private int servcie;
+
+    public int getServcie() {
+        return servcie;
+    }
+
+    public void setServcie(int servcie) {
+        this.servcie = servcie;
+    }
 
     public String getAdminName() {
         return adminName;
@@ -129,6 +147,14 @@ public class MainData implements Serializable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
 

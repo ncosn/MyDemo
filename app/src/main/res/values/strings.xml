@@ -16,7 +16,7 @@
     <string name="textview_time">时间：</string>
     <string name="button_clear">清除</string>
     <string name="button_filter">筛选</string>
-    <string name="textview_age">年龄：</string>
+    <string name="textview_service">服务：</string>
     <string-array name="spinner_time">
         <item>全部</item>
         <item>一周内</item>
@@ -24,10 +24,21 @@
         <item>三个月内</item>
         <item>一年内</item>
     </string-array>
-    <string-array name="spinner_age">
+    <string-array name="spinner_service">
+        <item>住宅</item>
+        <item>电动车</item>
+        <item>店铺</item>
+        <item>企事业</item>
+        <item>新能源</item>
+        <item>其他</item>
+    </string-array>
+    <string-array name="spinner_service_filter">
+        <item>住宅</item>
+        <item>电动车</item>
+        <item>店铺</item>
+        <item>企事业</item>
+        <item>新能源</item>
+        <item>其他</item>
         <item>全部</item>
-        <item>25岁以下</item>
-        <item>25—35岁</item>
-        <item>35岁以上</item>
     </string-array>
 </resources>

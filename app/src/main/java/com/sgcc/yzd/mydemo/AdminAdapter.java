@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,8 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Calendar;
 import java.util.List;
 
 public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHolder> {
@@ -43,9 +40,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
     public static String TOAST1 = "请输入称呼";
     public static String TOAST2 = "请输入留言";
 
-    /**
-     * 类型，用此来判断recyclerview该用哪个布局显示
-     */
+    /**类型，用此来判断recyclerview该用哪个布局显示*/
     public final int TYPE_EMPTY = 0;
     public final int TYPE_NORMAL = 1;
 
@@ -130,20 +125,17 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                     //表扬
                     case 0:
                         viewHolder.tvType.setText(PRAISE);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_praise));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_praise);
                         break;
                     //建议
                     case 1:
                         viewHolder.tvType.setText(ADVICE);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_advice));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_advice);
                         break;
                     //投诉
                     case 2:
                         viewHolder.tvType.setText(COMPLAIN);
-                        viewHolder.tvType.setBackground(context.getResources()
-                                .getDrawable(R.drawable.border_type_complain));
+                        viewHolder.tvType.setBackgroundResource(R.drawable.border_type_complain);
                         break;
                     default:
                         break;
@@ -257,40 +249,41 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
         tvComment = dialog.findViewById(R.id.tv_comment);
         tvWordsNum = dialog.findViewById(R.id.tv_words_num);
         String tel,time;
+        //获取客户姓名
         tvName.setText(data.getName());
-
+        //获取留言内容
         String msg = (data.getMsg()==null) ? "" : data.getMsg();
-        //Spannable设置不同大小样式的文本
+        //Spannable设置不同大小样式的文本，“留言内容”字体颜色设为黑色
         Spannable span = new SpannableString(CONTENT+msg);
         span.setSpan(new AbsoluteSizeSpan(13,true), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         span.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.black)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tvComment.setText(span);
 
+        //获取联系方式
         tel = data.getTel();
         tvTel.setText((tel==null)?"":tel);
+        //获取留言时间
         time = data.getTime();
         tvTime.setText(time);
-
+        //获取留言类型
         switch (data.getType()) {
             case 0:
                 tvType.setText("表扬");
-                tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_praise));
+                tvType.setBackgroundResource(R.drawable.border_type_praise);
                 break;
             case 1:
                 tvType.setText("建议");
-                tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_advice));
+                tvType.setBackgroundResource(R.drawable.border_type_advice);
                 break;
             case 2:
                 tvType.setText("批评");
-                tvType.setBackground(context.getResources()
-                        .getDrawable(R.drawable.border_type_complain));
+                tvType.setBackgroundResource(R.drawable.border_type_complain);
                 break;
             default:
                 break;
         }
 
+        //获取回复内容
         switch (data.getIfReply()) {
             case 0:
                 String adminCall = (data.getAdminName()==null) ? "" : data.getAdminName();
@@ -299,11 +292,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
                 etReply.setText(reply);
                 break;
             case 1:
-                break;
             default:
                 break;
         }
 
+        /* 回复对话框返回按钮点击事件 */
         btBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -311,13 +304,14 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.BaseViewHold
             }
         });
 
+        /* 回复对话框提交按钮点击事件 */
         btCommit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (etCall.getText().toString().equals("")) {
+                if ("".equals(etCall.getText().toString())) {
                     Toast.makeText(context,TOAST1,Toast.LENGTH_SHORT).show();
                     return;
-                } else if (etReply.getText().toString().equals("")) {
+                } else if ("".equals(etReply.getText().toString())) {
                     Toast.makeText(context,TOAST2,Toast.LENGTH_SHORT).show();
                     return;
                 }
